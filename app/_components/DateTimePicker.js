@@ -8,7 +8,7 @@ import { Button } from "@/app/_components/ui/Button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/_components/ui/Card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/Select"
 
-export default function AppointmentScheduler() {
+export default function DateTimePicker() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
