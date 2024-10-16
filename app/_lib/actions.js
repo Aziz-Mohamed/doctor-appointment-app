@@ -1,29 +1,34 @@
-"use server"
+"use server";
 
-import supabase from "./supabase"
+import { insertBooking } from "./data-server";
 
-export async function createBooking({ id, userId, doctorId, bookingDate, bookingTime, bookingStatus }) {
-
-  const { data, error } = await supabase
-  .from('bookings')
-  .insert([
-    {
-      id,
-      userId,
-      doctorId,
-      bookingDate,
-      bookingTime,
-      bookingStatus,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ])
-  .select()
-
-  if (error) {
-    console.error(error)
-    return null
+export async function createBooking(formData) {
+  if (!formData) {
+    throw new Error("FormData is null or undefined");
   }
 
-  return data
+  const rawFormData = {
+    userID: formData.get("userID"),
+    doctorID: formData.get("doctorID"),
+    bookingDate: formData.get("bookingDate"),
+    bookingTime: formData.get("bookingTime"),
+    bookingStatus: formData.get("bookingStatus"),
+  };
+
+  if (
+    !rawFormData.userID ||
+    !rawFormData.doctorID ||
+    !rawFormData.bookingDate ||
+    !rawFormData.bookingTime ||
+    !rawFormData.bookingStatus
+  ) {
+    throw new Error("One or more required fields are missing");
+  }
+
+  try {
+    const booking = await insertBooking(rawFormData);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }

@@ -13,6 +13,9 @@ export default function DateTimePicker() {
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
 
+console.log(selectedDate)
+console.log(selectedTime)
+
   const startDate = startOfMonth(currentDate)
   const endDate = endOfMonth(currentDate)
   const days = eachDayOfInterval({ start: startDate, end: endDate })
@@ -27,7 +30,7 @@ export default function DateTimePicker() {
 
     while (startTime < endTime) {
       slots.push(format(startTime, "hh:mm a"))
-      startTime = addMinutes(startTime, 30)
+      startTime = addMinutes(startTime, 30) // Add 30 minutes between slots
     }
 
     return slots
@@ -48,6 +51,7 @@ export default function DateTimePicker() {
     if (selectedDate && selectedTime) {
       alert(`Appointment booked for ${format(selectedDate, "MMMM d, yyyy")} at ${selectedTime}`)
       // Here you would typically send this data to your backend
+
     }
   }
 

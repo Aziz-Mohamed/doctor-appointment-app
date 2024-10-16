@@ -1,14 +1,3 @@
-// const bookingState = {
-//   id: null,
-//   userId: 1,
-//   doctorId: 1,
-//   bookingDate: '2023-03-15',
-//   bookingTime: '10:00',
-//   bookingStatus: 'pending',
-//   createdAt: new Date(),
-//   updatedAt: new Date()
-// }
-
 import supabase from "./supabase";
 
 export async function fetchBookings() {
@@ -20,4 +9,29 @@ export async function fetchBookings() {
   }
 
   return bookings;
+}
+
+
+export async function insertBooking({ userID, doctorID, bookingDate, bookingTime, bookingStatus }) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .insert([
+      {
+        userID: Number(userID),
+        doctorID: Number(doctorID),
+        bookingDate: bookingDate,
+        bookingTime: bookingTime,
+        bookingStatus: String(bookingStatus),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ])
+    .select()
+// console.log(data)
+  if (error) {  
+    console.error(error)
+    return null
+  }
+
+  return data
 }
