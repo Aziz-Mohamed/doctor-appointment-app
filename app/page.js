@@ -7,7 +7,7 @@ export default async function Home() {
     <div className="min-h-screen w-screen bg-gray-200 flex items-center justify-center">
       <div className="flex space-x-4">
         <DateTimePicker />
-        {/* <ManualInput /> */}
+        <ManualInput />
       </div>
     </div>
   );

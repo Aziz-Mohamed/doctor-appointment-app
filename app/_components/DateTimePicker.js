@@ -1,59 +1,89 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, Clock } from 'lucide-react'
-import { addMonths, format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, setHours, setMinutes, addMinutes } from "date-fns"
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import {
+  addMonths,
+  format,
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  isSameMonth,
+  isToday,
+  setHours,
+  setMinutes,
+  addMinutes,
+} from "date-fns";
 
-import { Button } from "@/app/_components/ui/Button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/_components/ui/Card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/Select"
+import { Button } from "@/app/_components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/app/_components/ui/Card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/_components/ui/Select";
+import { createBooking } from "../_lib/actions";
 
 export default function DateTimePicker() {
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedTime, setSelectedTime] = useState(null)
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
-console.log(selectedDate)
-console.log(selectedTime)
+  console.log(selectedDate);
+  console.log(selectedTime);
 
-  const startDate = startOfMonth(currentDate)
-  const endDate = endOfMonth(currentDate)
-  const days = eachDayOfInterval({ start: startDate, end: endDate })
+  const startDate = startOfMonth(currentDate);
+  const endDate = endOfMonth(currentDate);
+  const days = eachDayOfInterval({ start: startDate, end: endDate });
 
-  const previousMonth = () => setCurrentDate(addMonths(currentDate, -1))
-  const nextMonth = () => setCurrentDate(addMonths(currentDate, 1))
+  const previousMonth = () => setCurrentDate(addMonths(currentDate, -1));
+  const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
 
   const generateTimeSlots = () => {
-    const slots = []
-    let startTime = setHours(setMinutes(new Date(), 0), 9) // Start at 9:00 AM
-    const endTime = setHours(setMinutes(new Date(), 0), 17) // End at 5:00 PM
+    const slots = [];
+    let startTime = setHours(setMinutes(new Date(), 0), 9); // Start at 9:00 AM
+    const endTime = setHours(setMinutes(new Date(), 0), 17); // End at 5:00 PM
 
     while (startTime < endTime) {
-      slots.push(format(startTime, "hh:mm a"))
-      startTime = addMinutes(startTime, 30) // Add 30 minutes between slots
+      slots.push(format(startTime, "hh:mm a"));
+      startTime = addMinutes(startTime, 30); // Add 30 minutes between slots
     }
 
-    return slots
-  }
+    return slots;
+  };
 
-  const timeSlots = generateTimeSlots()
+  const timeSlots = generateTimeSlots();
 
   const handleDateClick = (day) => {
-    setSelectedDate(day)
-    setSelectedTime(null)
-  }
+    setSelectedDate(day);
+    setSelectedTime(null);
+  };
 
   const handleTimeSelect = (time) => {
-    setSelectedTime(time)
-  }
+    setSelectedTime(time);
+  };
 
   const handleBookAppointment = () => {
     if (selectedDate && selectedTime) {
-      alert(`Appointment booked for ${format(selectedDate, "MMMM d, yyyy")} at ${selectedTime}`)
-      // Here you would typically send this data to your backend
 
+      // alert(`Appointment booked for ${format(selectedDate, "MMMM d, yyyy")} at ${selectedTime}`)
+      // Here you would typically send this data to your backend
+      console.log("selectedDate", selectedDate);
+      console.log("selectedTime", selectedTime);
+      const appointmentData = {
+        bookingDate: format(selectedDate, "MMMM d, yyyy"),
+        bookingTime: selectedTime,
+      };
+      createBooking(appointmentData);
     }
-  }
+  };
 
   return (
     <Card className="w-full max-w-md mx-auto bg-background">
@@ -75,7 +105,10 @@ console.log(selectedTime)
       <CardContent>
         <div className="grid grid-cols-7 gap-1 text-center mb-4">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-            <div key={day} className="text-sm font-medium text-muted-foreground p-2">
+            <div
+              key={day}
+              className="text-sm font-medium text-muted-foreground p-2"
+            >
               {day}
             </div>
           ))}
@@ -89,7 +122,12 @@ console.log(selectedTime)
                   : isToday(day)
                   ? "bg-primary text-primary-foreground"
                   : ""
-              } ${selectedDate && day.toDateString() === selectedDate.toDateString() ? "border-2 border-primary" : ""}`}
+              } ${
+                selectedDate &&
+                day.toDateString() === selectedDate.toDateString()
+                  ? "border-2 border-primary"
+                  : ""
+              }`}
               onClick={() => handleDateClick(day)}
             >
               {format(day, "d")}
@@ -114,7 +152,9 @@ console.log(selectedTime)
               </Select>
             </>
           ) : (
-            <p className="text-sm text-muted-foreground">Please select a date to view available time slots.</p>
+            <p className="text-sm text-muted-foreground">
+              Please select a date to view available time slots.
+            </p>
           )}
         </div>
         <div className="mt-4 h-[40px]">
@@ -126,5 +166,5 @@ console.log(selectedTime)
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
