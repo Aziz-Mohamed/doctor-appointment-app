@@ -1,0 +1,37 @@
+|-- .env.local
+|-- .eslintrc.json
+|-- .gitignore
+|-- README.md
+|-- _lib
+    |-- utils.js
+|-- app
+    |-- _components
+        |-- AppointmentCard.js
+        |-- Appointments.js
+        |-- AppointmentsList.js
+        |-- Button.js
+        |-- DateTimePicker.js
+        |-- ManualInput.js
+        |-- ui
+            |-- Button.js
+            |-- Card.js
+            |-- Select.js
+    |-- _lib
+        |-- actions.js
+        |-- data-server.js
+        |-- supabase.js
+        |-- utils.js
+    |-- _styles
+    |-- fonts
+        |-- GeistMonoVF.woff
+        |-- GeistVF.woff
+    |-- globals.css
+    |-- layout.js
+    |-- page.js
+|-- jsconfig.json
+|-- next.config.mjs
+|-- package-lock.json
+|-- package.json
+|-- pnpm-lock.yaml
+|-- postcss.config.mjs
+|-- tailwind.config.js

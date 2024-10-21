@@ -1,16 +1,24 @@
 "use server";
 
-import { insertBooking } from "./data-server";
-export async function createBooking(formData) {
+import { fetchAppointments, insertAppointment } from "./data-server";
+export async function createAppointment(formData) {
   const rawFormData =
     formData instanceof FormData
       ? {
           userID: formData.get("userID"),
           doctorID: formData.get("doctorID"),
-          bookingDate: formData.get("bookingDate"),
-          bookingTime: formData.get("bookingTime"),
-          bookingStatus: formData.get("bookingStatus"),
+          appointmentDate: formData.get("appointmentDate"),
+          appointmentTime: formData.get("appointmentTime"),
+          appointmentStatus: formData.get("appointmentStatus"),
         }
       : formData;
-  const booking = await insertBooking(rawFormData);
+  const appointments = await insertAppointment(rawFormData);
+}
+
+
+
+export async function getAppointments() {
+  const appointments = await fetchAppointments();
+  console.log("appointments", appointments)
+  return appointments;
 }

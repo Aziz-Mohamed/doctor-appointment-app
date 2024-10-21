@@ -29,7 +29,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/Select";
-import { createBooking } from "../_lib/actions";
+
+import { createAppointment } from "../_lib/actions";
 
 export default function DateTimePicker() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -72,16 +73,15 @@ export default function DateTimePicker() {
 
   const handleBookAppointment = () => {
     if (selectedDate && selectedTime) {
-
       // alert(`Appointment booked for ${format(selectedDate, "MMMM d, yyyy")} at ${selectedTime}`)
       // Here you would typically send this data to your backend
-      console.log("selectedDate", selectedDate);
-      console.log("selectedTime", selectedTime);
+      // console.log("selectedDate", selectedDate);
+      // console.log("selectedTime", selectedTime);
       const appointmentData = {
-        bookingDate: format(selectedDate, "MMMM d, yyyy"),
-        bookingTime: selectedTime,
+        appointmentDate: format(selectedDate, "MMMM d, yyyy"),
+        appointmentTime: selectedTime,
       };
-      createBooking(appointmentData);
+      createAppointment(appointmentData);
     }
   };
 

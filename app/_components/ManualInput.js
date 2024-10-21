@@ -1,13 +1,9 @@
-
-
 import React from "react";
-import { createBooking } from "../_lib/actions";
+import { createAppointment } from "../_lib/actions";
 
 function ManualInput() {
-
-
   return (
-    <form action={createBooking} className="space-y-4">
+    <form action={createAppointment} className="space-y-4">
       <label className="block">
         User Id:
         <input
@@ -27,29 +23,29 @@ function ManualInput() {
       </label>
       <br />
       <label className="block">
-        Booking Date:
+        appointment Date:
         <input
           className="block w-full px-2 py-1 text-sm border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
           type="date"
-          name="bookingDate"
+          name="appointmentDate"
         />
       </label>
       <br />
       <label className="block">
-        Booking Time:
+        appointment Time:
         <input
           className="block w-full px-2 py-1 text-sm border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
           type="time"
-          name="bookingTime"
+          name="appointmentTime"
         />
       </label>
       <br />
       <label className="block">
-        Booking Status:
+        appointment Status:
         <input
           className="block w-full px-2 py-1 text-sm border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
           type="text"
-          name="bookingStatus"
+          name="appointmentStatus"
         />
       </label>
       <br />
