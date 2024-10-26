@@ -11,7 +11,9 @@
         |-- AppointmentsList.js
         |-- Button.js
         |-- DateTimePicker.js
+        |-- GoogleOAuth.js
         |-- ManualInput.js
+        |-- Signup.js
         |-- ui
             |-- Button.js
             |-- Card.js
@@ -22,12 +24,22 @@
         |-- supabase.js
         |-- utils.js
     |-- _styles
+    |-- auth
+        |-- callback
+            |-- route.js
+    |-- error
+        |-- page.js
     |-- fonts
         |-- GeistMonoVF.woff
         |-- GeistVF.woff
     |-- globals.css
     |-- layout.js
+    |-- login
+        |-- actions.js
+        |-- page.js
     |-- page.js
+    |-- private
+        |-- page.js
 |-- jsconfig.json
 |-- next.config.mjs
 |-- package-lock.json
@@ -35,3 +47,8 @@
 |-- pnpm-lock.yaml
 |-- postcss.config.mjs
 |-- tailwind.config.js
+|-- utils
+    |-- supabase
+        |-- client.js
+        |-- middleware.js
+        |-- server.js
