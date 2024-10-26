@@ -47,12 +47,12 @@ export async function signInWithGoogleOAuth() {
   // 1. Create a Supabase client
   const supabase = createClient();
   const origin = headers().get("origin");
-  console.log("origin", origin);  
+  // console.log("origin", origin);  
   // 2. Sign in with GitHub
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${origin}auth/callback`,
+      redirectTo: `${origin}/auth/callback`,
       queryParams: {
         access_type: 'offline',
         prompt: 'consent',
@@ -65,4 +65,8 @@ export async function signInWithGoogleOAuth() {
     return redirect(data.url);
   }
   // 3. Redirect to landing page
+}
+
+export async function signOut() {
+  const { error } = await supabase.auth.signOut()
 }
