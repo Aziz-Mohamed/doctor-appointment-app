@@ -67,6 +67,10 @@ export async function signInWithGoogleOAuth() {
   // 3. Redirect to landing page
 }
 
-export async function signOut() {
+export async function signout() {
+  const supabase = createClient();
   const { error } = await supabase.auth.signOut()
+  console.log("the error is", error);
+  revalidatePath("/", "layout");
+  redirect("/");
 }

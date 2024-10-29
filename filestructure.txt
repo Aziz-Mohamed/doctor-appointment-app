@@ -13,6 +13,8 @@
         |-- DateTimePicker.js
         |-- GoogleOAuth.js
         |-- ManualInput.js
+        |-- RoleAccessProtection.js
+        |-- Signout.js
         |-- Signup.js
         |-- ui
             |-- Button.js
@@ -20,6 +22,7 @@
             |-- Select.js
     |-- _lib
         |-- actions.js
+        |-- customHooks.js
         |-- data-server.js
         |-- supabase.js
         |-- utils.js

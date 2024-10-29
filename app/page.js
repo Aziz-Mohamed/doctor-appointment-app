@@ -3,6 +3,7 @@ import { Appointments } from "./_components/Appointments";
 import DateTimePicker from "./_components/DateTimePicker";
 import GoogleOAuth from "./_components/GoogleOAuth";
 import Link from "next/link";
+import Signout from "./_components/Signout";
 
 export default async function Home() {
   const supabase = createClient();
@@ -16,14 +17,14 @@ export default async function Home() {
         <Appointments />
       </div>
 
-      {!user && (
+      {!user ? (
         <Link
           href="/login"
           className="hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
         >
           Go to Login/Signup
         </Link>
-      )}
+      ) : (<Signout/>)}
     </div>
   );
 }
