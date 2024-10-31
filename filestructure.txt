@@ -27,9 +27,13 @@
         |-- supabase.js
         |-- utils.js
     |-- _styles
+    |-- admin
+        |-- page.js
     |-- auth
         |-- callback
             |-- route.js
+    |-- dashboard
+        |-- page.js
     |-- error
         |-- page.js
     |-- fonts

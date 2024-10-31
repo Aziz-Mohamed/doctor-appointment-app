@@ -10,7 +10,7 @@ export function createRoleProtection(dataRetrievalFn) {
       return(
 
         <div>
-      <p>You are not logged in</p>
+      <p>You are not logged in or not authorized , if so login with the authorized account pls.</p>
       <Link href={"/login"}>
         <Button> Login</Button>
       </Link>

@@ -9,6 +9,7 @@ export default function LoginPage() {
         <Signup />
         <GoogleOAuth />
     </div>
+
     // <form>
     //   <label htmlFor="email">Email:</label>
     //   <input id="email" name="email" type="email" required />
@@ -17,5 +18,6 @@ export default function LoginPage() {
     //   <button formAction={loginWithPassword}>Log in</button>
     //   <button formAction={signupWithPassword}>Sign up</button>
     // </form>
+    
   )
 }
