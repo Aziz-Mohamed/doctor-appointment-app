@@ -1,13 +1,14 @@
-
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
-import { AdminAccessProtectionServer, UserAccessProtectionServer } from "../_components/RoleAccessProtection";
+import {
+  AdminAccessProtectionServer,
+  UserAccessProtectionServer,
+} from "../../_components/RoleAccessProtection";
 
 export default async function PrivatePage() {
-
-const supabase = createClient()
-const { data, error } = await supabase.auth.getUser();
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
 
   return (
     <AdminAccessProtectionServer>
@@ -16,7 +17,6 @@ const { data, error } = await supabase.auth.getUser();
     </AdminAccessProtectionServer>
   );
 }
-
 
 // export default async function PrivatePage() {
 
@@ -30,4 +30,3 @@ const { data, error } = await supabase.auth.getUser();
 
 //   return <p>Hello {data.user.email}</p>
 // }
-

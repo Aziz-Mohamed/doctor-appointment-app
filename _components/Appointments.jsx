@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { getAppointments } from "../_lib/actions";
 import AppointmentsList from "./AppointmentsList";
 
-
 export function Appointments() {
   const [value, setValue] = useState([]);
 
@@ -13,7 +12,7 @@ export function Appointments() {
   //   console.log("type of Data", Array.isArray(value));
   //   console.log("value", value);
   // }, [value]);
-  
+
   const handleFetchData = async () => {
     const data = await getAppointments();
     console.log("Data", data);

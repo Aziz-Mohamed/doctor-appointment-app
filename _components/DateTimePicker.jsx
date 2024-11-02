@@ -15,20 +15,20 @@ import {
   addMinutes,
 } from "date-fns";
 
-import { Button } from "@/app/_components/ui/Button";
+import { Button } from "@/_components/ui/Button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/app/_components/ui/Card";
+} from "@/_components/ui/Card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/app/_components/ui/Select";
+} from "@/_components/ui/Select";
 
 import { createAppointment } from "../_lib/actions";
 

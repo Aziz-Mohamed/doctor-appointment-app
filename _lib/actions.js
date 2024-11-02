@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { fetchAppointments, insertAppointment } from "./data-server";
+import { fetchAppointments, insertAppointment } from "@/_lib/data-server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -47,17 +47,18 @@ export async function signInWithGoogleOAuth() {
   // 1. Create a Supabase client
   const supabase = createClient();
   const origin = headers().get("origin");
-  // console.log("origin", origin);  
+  // console.log("origin", origin);
   // 2. Sign in with GitHub
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
       redirectTo: `${origin}/auth/callback`,
       queryParams: {
-        access_type: 'offline',
-        prompt: 'consent',
+        access_type: "offline",
+        prompt: "consent",
+      },
     },
-}});
+  });
 
   if (error) {
     console.log("the error is", error);
@@ -69,7 +70,7 @@ export async function signInWithGoogleOAuth() {
 
 export async function signout() {
   const supabase = createClient();
-  const { error } = await supabase.auth.signOut()
+  const { error } = await supabase.auth.signOut();
   console.log("the error is", error);
   revalidatePath("/", "layout");
   redirect("/");

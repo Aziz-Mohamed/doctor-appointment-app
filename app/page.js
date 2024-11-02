@@ -4,21 +4,19 @@ import DateTimePicker from "./_components/DateTimePicker";
 import GoogleOAuth from "./_components/GoogleOAuth";
 import Link from "next/link";
 import Signout from "./_components/Signout";
-import { getAdminData, getUserData } from "./_lib/customHooks";
+import { getAdminData, getUserData } from "../_lib/customHooks";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const { roleData: admin } = await getAdminData() ?? {};
-  const { data: user } = await getUserData() ?? {};
+  const { roleData: admin } = (await getAdminData()) ?? {};
+  const { data: user } = (await getUserData()) ?? {};
 
-// return(<p> okay app page.js</p>)
+  // return(<p> okay app page.js</p>)
 
   if (admin) {
     return redirect("/admin");
-  
   } else if (user) {
     return redirect("/dashboard");
-  
   } else {
     return (
       <Link
@@ -29,9 +27,6 @@ export default async function Home() {
       </Link>
     );
   }
-
-
-
 
   // const supabase = createClient();
   // const {

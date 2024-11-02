@@ -1,13 +1,12 @@
-import GoogleOAuth from '../_components/GoogleOAuth'
-import Signup from '../_components/Signup'
-import { loginWithPassword, signupWithPassword } from './actions'
+import GoogleOAuth from "../../_components/GoogleOAuth";
+import Signup from "../../_components/Signup";
+import { loginWithPassword, signupWithPassword } from "./actions";
 
 export default function LoginPage() {
   return (
-
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
-        <Signup />
-        <GoogleOAuth />
+      <Signup />
+      <GoogleOAuth />
     </div>
 
     // <form>
@@ -18,6 +17,5 @@ export default function LoginPage() {
     //   <button formAction={loginWithPassword}>Log in</button>
     //   <button formAction={signupWithPassword}>Sign up</button>
     // </form>
-    
-  )
+  );
 }

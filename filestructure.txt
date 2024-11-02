@@ -2,32 +2,39 @@
 |-- .eslintrc.json
 |-- .gitignore
 |-- README.md
+|-- _components
+    |-- AppSidebar.jsx
+    |-- AppointmentCard.jsx
+    |-- Appointments.jsx
+    |-- AppointmentsList.jsx
+    |-- Button.jsx
+    |-- DateTimePicker.jsx
+    |-- GoogleOAuth.jsx
+    |-- ManualInput.jsx
+    |-- RoleAccessProtection.jsx
+    |-- Signout.jsx
+    |-- Signup.jsx
+    |-- ui
+        |-- Button.jsx
+        |-- Button2.jsx
+        |-- Card.jsx
+        |-- Input.jsx
+        |-- Select.jsx
+        |-- Separator.jsx
+        |-- Sheet.jsx
+        |-- Sidebar.jsx
+        |-- Skeleton.jsx
+        |-- Tooltip.jsx
 |-- _lib
+    |-- actions.js
+    |-- customHooks.js
+    |-- data-server.js
+    |-- supabase.js
     |-- utils.js
 |-- app
-    |-- _components
-        |-- AppointmentCard.js
-        |-- Appointments.js
-        |-- AppointmentsList.js
-        |-- Button.js
-        |-- DateTimePicker.js
-        |-- GoogleOAuth.js
-        |-- ManualInput.js
-        |-- RoleAccessProtection.js
-        |-- Signout.js
-        |-- Signup.js
-        |-- ui
-            |-- Button.js
-            |-- Card.js
-            |-- Select.js
-    |-- _lib
-        |-- actions.js
-        |-- customHooks.js
-        |-- data-server.js
-        |-- supabase.js
-        |-- utils.js
     |-- _styles
     |-- admin
+        |-- layout.js
         |-- page.js
     |-- auth
         |-- callback
@@ -47,6 +54,9 @@
     |-- page.js
     |-- private
         |-- page.js
+|-- components.json
+|-- hooks
+    |-- useMobile.js
 |-- jsconfig.json
 |-- next.config.mjs
 |-- package-lock.json
