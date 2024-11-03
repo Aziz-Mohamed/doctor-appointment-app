@@ -6,6 +6,7 @@ import Link from "next/link";
 import Signout from "@/_components/Signout";
 import { getAdminData, getUserData } from "../_lib/customHooks";
 import { redirect } from "next/navigation";
+import { SidebarProvider } from  "@/_components/ui/Sidebar";
 
 
 export default async function Home() {

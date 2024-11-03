@@ -1,5 +1,6 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/_components/ui/Sidebar"
-import { AppSidebar } from "@/_components/appSidebar"
+import { AppSidebar } from "@/_components/AppSidebar"
+import "@/app/globals.css";
 
 export default function Layout({ children }) {
   return (

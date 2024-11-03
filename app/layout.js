@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/app/globals.css";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
