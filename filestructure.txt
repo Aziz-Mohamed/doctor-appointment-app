@@ -20,6 +20,7 @@
         |-- Card.jsx
         |-- Collapsible.jsx
         |-- Input.jsx
+        |-- Popover.jsx
         |-- Select.jsx
         |-- Separator.jsx
         |-- Sheet.jsx
