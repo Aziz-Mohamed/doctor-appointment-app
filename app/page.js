@@ -1,11 +1,12 @@
 import { createClient } from "@/utils/supabase/server";
-import { Appointments } from "./_components/Appointments";
-import DateTimePicker from "./_components/DateTimePicker";
-import GoogleOAuth from "./_components/GoogleOAuth";
+import { Appointments } from "@/_components/Appointments";
+import DateTimePicker from "@/_components/DateTimePicker";
+import GoogleOAuth from "@/_components/GoogleOAuth";
 import Link from "next/link";
-import Signout from "./_components/Signout";
+import Signout from "@/_components/Signout";
 import { getAdminData, getUserData } from "../_lib/customHooks";
 import { redirect } from "next/navigation";
+
 
 export default async function Home() {
   const { roleData: admin } = (await getAdminData()) ?? {};
@@ -13,6 +14,12 @@ export default async function Home() {
 
   // return(<p> okay app page.js</p>)
 
+  // if (admin) {
+  //   return (
+  //     <SidebarProvider>
+  //       {redirect("/admin")}
+  //     </SidebarProvider>
+  //   );
   if (admin) {
     return redirect("/admin");
   } else if (user) {

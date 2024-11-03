@@ -1,5 +1,5 @@
-import GoogleOAuth from "../../_components/GoogleOAuth";
-import Signup from "../../_components/Signup";
+import GoogleOAuth from "../.@/_components/GoogleOAuth";
+import Signup from "../.@/_components/Signup";
 import { loginWithPassword, signupWithPassword } from "./actions";
 
 export default function LoginPage() {

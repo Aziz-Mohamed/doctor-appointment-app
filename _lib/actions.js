@@ -22,7 +22,7 @@ export async function createAppointment(formData) {
 
 export async function getAppointments() {
   const appointments = await fetchAppointments();
-  console.log("appointments", appointments);
+  // console.log("appointments", appointments);
   return appointments;
 }
 
@@ -71,7 +71,11 @@ export async function signInWithGoogleOAuth() {
 export async function signout() {
   const supabase = createClient();
   const { error } = await supabase.auth.signOut();
-  console.log("the error is", error);
+  if (error) {
+    console.error("Error signing out:", error.message);
+    return;
+  }
+
   revalidatePath("/", "layout");
   redirect("/");
 }

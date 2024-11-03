@@ -1,14 +1,20 @@
-import { SidebarProvider, SidebarTrigger } from "@/_components/ui/sidebar"
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/_components/ui/Sidebar"
 import { AppSidebar } from "@/_components/appSidebar"
 
 export default function Layout({ children }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
+      <div className="flex h-screen overflow-hidden">
+        <AppSidebar />
+        <SidebarInset className="flex flex-col flex-1">
+          <header className="flex h-16 items-center border-b px-4">
+            <SidebarTrigger />
+          </header>
+          <main className="flex-1 overflow-auto p-4">
+            {children}
+          </main>
+        </SidebarInset>
+      </div>
     </SidebarProvider>
   )
 }

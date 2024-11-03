@@ -1,8 +1,8 @@
 import React from "react";
-import { Appointments } from "../../_components/Appointments";
-import DateTimePicker from "../../_components/DateTimePicker";
-import { UserAccessProtectionServer } from "../../_components/RoleAccessProtection";
-import Signout from "../../_components/Signout";
+import { Appointments } from "../.@/_components/Appointments";
+import DateTimePicker from "../.@/_components/DateTimePicker";
+import { UserAccessProtectionServer } from "../.@/_components/RoleAccessProtection";
+import Signout from "../.@/_components/Signout";
 
 function page() {
   return (

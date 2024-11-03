@@ -37,8 +37,8 @@ export default function DateTimePicker() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
-  console.log(selectedDate);
-  console.log(selectedTime);
+  // console.log(selectedDate);
+  // console.log(selectedTime);
 
   const startDate = startOfMonth(currentDate);
   const endDate = endOfMonth(currentDate);

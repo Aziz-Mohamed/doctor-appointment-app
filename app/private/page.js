@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import {
   AdminAccessProtectionServer,
   UserAccessProtectionServer,
-} from "../../_components/RoleAccessProtection";
+} from "../.@/_components/RoleAccessProtection";
 
 export default async function PrivatePage() {
   const supabase = createClient();

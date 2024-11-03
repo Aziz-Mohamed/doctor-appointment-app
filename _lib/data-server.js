@@ -4,7 +4,7 @@ export async function fetchAppointments() {
   const { data: appointments, error } = await supabase
     .from("appointments")
     .select("*");
-console.log("appointments", appointments)
+// console.log("appointments", appointments)
   if (error) {
     console.error(error);
     return null;

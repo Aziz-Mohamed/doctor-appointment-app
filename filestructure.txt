@@ -18,6 +18,7 @@
         |-- Button.jsx
         |-- Button2.jsx
         |-- Card.jsx
+        |-- Collapsible.jsx
         |-- Input.jsx
         |-- Select.jsx
         |-- Separator.jsx
@@ -56,6 +57,7 @@
         |-- page.js
 |-- components.json
 |-- hooks
+    |-- use-mobile.jsx
     |-- useMobile.js
 |-- jsconfig.json
 |-- next.config.mjs

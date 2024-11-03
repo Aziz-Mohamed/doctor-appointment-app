@@ -1,5 +1,5 @@
 import React from "react";
-import { AdminAccessProtectionServer } from "../../_components/RoleAccessProtection";
+import { AdminAccessProtectionServer } from "@/_components/RoleAccessProtection";
 
 function page() {
   return (

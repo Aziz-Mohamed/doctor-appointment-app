@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getAppointments } from "../_lib/actions";
-import AppointmentsList from "./AppointmentsList";
+import AppointmentsList from "@/_components/AppointmentsList";
 
 export function Appointments() {
   const [value, setValue] = useState([]);
