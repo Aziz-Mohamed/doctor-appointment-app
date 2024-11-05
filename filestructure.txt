@@ -9,6 +9,7 @@
     |-- AppointmentsList.jsx
     |-- Button.jsx
     |-- DateTimePicker.jsx
+    |-- DynamicLink.jsx
     |-- GoogleOAuth.jsx
     |-- ManualInput.jsx
     |-- RoleAccessProtection.jsx
@@ -38,6 +39,9 @@
     |-- admin
         |-- layout.js
         |-- page.js
+        |-- specialties
+            |-- [specialty]
+                |-- page.js
     |-- auth
         |-- callback
             |-- route.js
