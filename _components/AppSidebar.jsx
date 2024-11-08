@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
-import "@/app/globals.css";
+import InsertFakeBookingButton from "@/_components/InsertFakeBookingButton";
+import {getAppointmentsWithFilter} from "@/_lib/actions";
 import {
   Activity,
   Calendar,
@@ -157,6 +160,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* Medical Specialties */}
+
         <SidebarGroup>
           <SidebarGroupLabel>Medical Specialties</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -178,7 +182,7 @@ export function AppSidebar() {
                       <SidebarMenuSub>
                         {specialty.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild>
+                            <SidebarMenuSubButton asChild >
                               <Link
                                 href={`/admin/specialties/${item.url}`}
                                 prefetch

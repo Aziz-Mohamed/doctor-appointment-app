@@ -11,6 +11,7 @@
     |-- DateTimePicker.jsx
     |-- DynamicLink.jsx
     |-- GoogleOAuth.jsx
+    |-- InsertFakeBookingButton.jsx
     |-- ManualInput.jsx
     |-- RoleAccessProtection.jsx
     |-- Signout.jsx
@@ -28,10 +29,13 @@
         |-- Sidebar.jsx
         |-- Skeleton.jsx
         |-- Tooltip.jsx
+|-- _context
+    |-- AppointmentsContext.js
 |-- _lib
     |-- actions.js
     |-- customHooks.js
     |-- data-server.js
+    |-- fakeAppointmentsData.js
     |-- supabase.js
     |-- utils.js
 |-- app
