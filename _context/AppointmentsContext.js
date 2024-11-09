@@ -1,24 +1,20 @@
-
+"use client"
 import { fetchAllAppointmentsFromSupabase } from '@/_lib/data-server';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 
-export const AppointmentsContext = createContext();
+export const AppointmentsContext = createContext({
+  appointments: [],
+  filteredAppointments: [],
+  filters: {},
+});
+
 
 export const AppointmentsProvider = ({ children }) => {
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [filters, setFilters] = useState({});
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      const appointments = await fetchAllAppointmentsFromSupabase();
-      setAppointments(appointments);
-      setFilteredAppointments(appointments);
-    };
-    fetchAppointments();
-  }, []);
-
-
+  
   const handleFilterChange = (filter) => {
     setFilters(filter);
     const filteredData = appointments.filter((appointment) => {
@@ -33,8 +29,11 @@ export const AppointmentsProvider = ({ children }) => {
     <AppointmentsContext.Provider
       value={{
         appointments,
+        setAppointments,
         filteredAppointments,
+        setFilteredAppointments,
         filters,
+        setFilters,
         handleFilterChange,
       }}
     >
@@ -52,8 +51,9 @@ export const useAppointments = () => {
     throw new Error('useAppointments must be used within an AppointmentsProvider');
   }
 
-  return context;
-};
+  const { appointments, setAppointments, filteredAppointments, setFilteredAppointments } = context;
 
+  return { appointments, setAppointments, filteredAppointments, setFilteredAppointments };
+};
 
 

@@ -15,7 +15,7 @@ export function Appointments() {
 
   const handleFetchData = async () => {
     const data = await getAppointments();
-    console.log("Data", data);
+    // console.log("Data", data);
     setValue(data);
   };
   return (

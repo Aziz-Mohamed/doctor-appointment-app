@@ -7,6 +7,7 @@
     |-- AppointmentCard.jsx
     |-- Appointments.jsx
     |-- AppointmentsList.jsx
+    |-- AppointmentsTable.jsx
     |-- Button.jsx
     |-- DateTimePicker.jsx
     |-- DynamicLink.jsx

@@ -2,23 +2,17 @@
 import React, { useContext } from "react";
 import { AdminAccessProtectionServer } from "@/_components/RoleAccessProtection";
 import  InsertFakeBookingButton  from "@/_components/InsertFakeBookingButton";
-// import { AppointmentsContext } from "@/_context/AppointmentsContext";
-// import { useAppointments } from "@/_context/useAppointments";
+import AppointmentsTable from "@/_components/AppointmentsTable";
 
 function page() {
-  // const {appointments} = useAppointments();
-  // const context = useContext(AppointmentsContext);
   return (
     <AdminAccessProtectionServer>
       <div>
         This is the admin dashboard
 
-        <div>
-          here is the data fetched
-          {/* <div>{JSON.stringify(appointments)}</div> */}
-        </div>
-
+          <AppointmentsTable/>
       </div>
+
       <InsertFakeBookingButton/>
 
     </AdminAccessProtectionServer>

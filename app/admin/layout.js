@@ -2,11 +2,11 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/_components/ui/Sidebar"
 import { AppSidebar } from "@/_components/AppSidebar"
 import "@/app/globals.css";
-// import { AppointmentsProvider } from "@/_context/AppointmentsContext";
+import { AppointmentsProvider } from "@/_context/AppointmentsContext";
 
 export default function Layout({ children }) {
   return (
-    // <AppointmentsProvider>
+    <AppointmentsProvider>
       <SidebarProvider>
         <div className="flex h-screen overflow-hidden">
           <AppSidebar />
@@ -20,6 +20,6 @@ export default function Layout({ children }) {
           </SidebarInset>
         </div>
       </SidebarProvider>
-    // </AppointmentsProvider>
+    </AppointmentsProvider>
   )
 }

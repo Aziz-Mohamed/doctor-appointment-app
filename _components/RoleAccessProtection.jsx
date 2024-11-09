@@ -27,5 +27,5 @@ export function createRoleProtection(dataRetrievalFn) {
 
 export const UserAccessProtectionServer = createRoleProtection(getUserData);
 export const AdminAccessProtectionServer = createRoleProtection(getAdminData);
-// export const UserAccessProtectionClient = createRoleProtection(() =>getUserData(serverOrClient="client"))
-// export const AdminAccessProtectionClient = createRoleProtection(()=>getAdminData(serverOrClient="client"))
+export const UserAccessProtectionClient = createRoleProtection(() =>getUserData(serverOrClient="client"))
+export const AdminAccessProtectionClient = createRoleProtection(()=>getAdminData(serverOrClient="client"))

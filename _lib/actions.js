@@ -21,7 +21,7 @@ export async function getAppointments() {
 export async function getAppointmentsWithFilter(filter) {
   // filters is an object with column and value
  const filteredAppointments = await fetchFilteredAppointmentsFromSupabase(filter);
- console.log("filteredAppointments", filteredAppointments)
+ console
  return filteredAppointments
 }
 
@@ -121,7 +121,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T08:00:00Z",
       updatedAt: "2024-11-01T08:30:00Z",
       userID: "f1c6b676-3e77-4a8f-9e90-23bce43c8211",
-      specialties: "family-medicine",
+      specialty: "family-medicine",
     },
     {
       doctorID: 2,
@@ -131,7 +131,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T09:00:00Z",
       updatedAt: "2024-11-01T09:30:00Z",
       userID: "a2d4b478-1e99-4b7a-8d4f-6e2f8b65a111",
-      specialties: "family-medicine",
+      specialty: "family-medicine",
     },
     {
       doctorID: 3,
@@ -141,7 +141,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T10:00:00Z",
       updatedAt: "2024-11-01T10:30:00Z",
       userID: "b3e4c688-2f21-4d2f-9e12-7f4b4c79b222",
-      specialties: "family-medicine",
+      specialty: "family-medicine",
     },
     // Internal Medicine
     {
@@ -152,7 +152,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T08:00:00Z",
       updatedAt: "2024-11-02T08:30:00Z",
       userID: "c4f5d699-3g33-4d3f-8f34-8e5c5d87c333",
-      specialties: "internal-medicine",
+      specialty: "internal-medicine",
     },
     {
       doctorID: 5,
@@ -162,7 +162,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T09:00:00Z",
       updatedAt: "2024-11-02T09:30:00Z",
       userID: "d5e6e711-4h44-4e4f-8g45-9f6d6e98d444",
-      specialties: "internal-medicine",
+      specialty: "internal-medicine",
     },
     {
       doctorID: 6,
@@ -172,7 +172,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T10:00:00Z",
       updatedAt: "2024-11-02T10:30:00Z",
       userID: "e6f7f822-5i55-5f5f-9h56-0a7f7f09e555",
-      specialties: "internal-medicine",
+      specialty: "internal-medicine",
     },
     // Pediatrics
     {
@@ -183,7 +183,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T08:00:00Z",
       updatedAt: "2024-11-03T08:30:00Z",
       userID: "f7g8g933-6j66-6g6g-0i67-1b8g8g20f666",
-      specialties: "pediatrics",
+      specialty: "pediatrics",
     },
     {
       doctorID: 8,
@@ -193,7 +193,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T09:00:00Z",
       updatedAt: "2024-11-03T09:30:00Z",
       userID: "g8h9h044-7k77-7h7h-1j78-2c9h9h31g777",
-      specialties: "pediatrics",
+      specialty: "pediatrics",
     },
     {
       doctorID: 9,
@@ -203,7 +203,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T10:00:00Z",
       updatedAt: "2024-11-03T10:30:00Z",
       userID: "h9i0i155-8l88-8i8i-2k89-3d0i0i42h888",
-      specialties: "pediatrics",
+      specialty: "pediatrics",
     },
     // Cardiology
     {
@@ -214,7 +214,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T08:00:00Z",
       updatedAt: "2024-11-01T08:30:00Z",
       userID: "aa1aa111-11aa-11a1-1a1a-1111aa1a1a1a",
-      specialties: "cardiology",
+      specialty: "cardiology",
     },
     {
       doctorID: 11,
@@ -224,7 +224,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T08:00:00Z",
       updatedAt: "2024-11-01T08:30:00Z",
       userID: "bb2bb222-22bb-22b2-2b2b-2222bb2b2b2b",
-      specialties: "cardiology",
+      specialty: "cardiology",
     },
     {
       doctorID: 12,
@@ -234,7 +234,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-01T08:00:00Z",
       updatedAt: "2024-11-01T08:30:00Z",
       userID: "cc3cc333-33cc-33c3-3c3c-3333cc3c3c3c",
-      specialties: "cardiology",
+      specialty: "cardiology",
     },
       // Dermatology
     {
@@ -245,7 +245,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T08:00:00Z",
       updatedAt: "2024-11-02T08:30:00Z",
       userID: "dd4dd444-44dd-44d4-4d4d-4444dd4d4d4d",
-      specialties: "dermatology",
+      specialty: "dermatology",
     },
     {
       doctorID: 14,
@@ -255,7 +255,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T08:00:00Z",
       updatedAt: "2024-11-02T08:30:00Z",
       userID: "ee5ee555-55ee-55e5-5e5e-5555ee5e5e5e",
-      specialties: "dermatology",
+      specialty: "dermatology",
     },
     {
       doctorID: 15,
@@ -265,7 +265,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-02T08:00:00Z",
       updatedAt: "2024-11-02T08:30:00Z",
       userID: "ff6ff666-66ff-66f6-6f6f-6666ff6f6f6f",
-      specialties: "dermatology",
+      specialty: "dermatology",
     },
     // Endocrinology
     {
@@ -276,7 +276,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T08:00:00Z",
       updatedAt: "2024-11-03T08:30:00Z",
       userID: "gg7gg777-77gg-77g7-7g7g-7777gg7g7g7g",
-      specialties: "endocrinology",
+      specialty: "endocrinology",
     },
     {
       doctorID: 17,
@@ -286,7 +286,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T08:00:00Z",
       updatedAt: "2024-11-03T08:30:00Z",
       userID: "hh8hh888-88hh-88h8-8h8h-8888hh8h8h8h",
-      specialties: "endocrinology",
+      specialty: "endocrinology",
     },
     {
       doctorID: 18,
@@ -296,7 +296,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-03T08:00:00Z",
       updatedAt: "2024-11-03T08:30:00Z",
       userID: "ii9ii999-99ii-99i9-9i9i-9999ii9i9i9i",
-      specialties: "endocrinology",
+      specialty: "endocrinology",
     },
     // Gastroenterology
     {
@@ -307,7 +307,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-04T08:00:00Z",
       updatedAt: "2024-11-04T08:30:00Z",
       userID: "jj1jj111-11jj-11j1-1j1j-1111jj1j1j1j",
-      specialties: "gastroenterology",
+      specialty: "gastroenterology",
     },
     {
       doctorID: 20,
@@ -317,7 +317,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-04T08:00:00Z",
       updatedAt: "2024-11-04T08:30:00Z",
       userID: "kk2kk222-22kk-22k2-2k2k-2222kk2k2k2k",
-      specialties: "gastroenterology",
+      specialty: "gastroenterology",
     },
     {
       doctorID: 21,
@@ -327,7 +327,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-04T08:00:00Z",
       updatedAt: "2024-11-04T08:30:00Z",
       userID: "ll3ll333-33ll-33l3-3l3l-3333ll3l3l3l",
-      specialties: "gastroenterology",
+      specialty: "gastroenterology",
     },
     // Neurology
     {
@@ -338,7 +338,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-05T08:00:00Z",
       updatedAt: "2024-11-05T08:30:00Z",
       userID: "mm4mm444-44mm-44m4-4m4m-4444mm4m4m4m",
-      specialties: "neurology",
+      specialty: "neurology",
     },
     {
       doctorID: 23,
@@ -348,7 +348,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-05T08:00:00Z",
       updatedAt: "2024-11-05T08:30:00Z",
       userID: "nn5nn555-55nn-55n5-5n5n-5555nn5n5n5n",
-      specialties: "neurology",
+      specialty: "neurology",
     },
     {
       doctorID: 24,
@@ -358,7 +358,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-05T08:00:00Z",
       updatedAt: "2024-11-05T08:30:00Z",
       userID: "oo6oo666-66oo-66o6-6o6o-6666oo6o6o6o",
-      specialties: "neurology",
+      specialty: "neurology",
     },
     // Oncology
     {
@@ -369,7 +369,7 @@ export async function insertFakeAppointments() {
       createdAt: "2024-11-06T08:00:00Z",
       updatedAt: "2024-11-06T08:30:00Z",
       userID: "pp7pp777-77pp-77p7-7p7p-7777pp7p7p7p",
-      specialties: "oncology",
+      specialty: "oncology",
     },
   ];
 
