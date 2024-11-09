@@ -43,7 +43,6 @@
     |-- _styles
     |-- admin
         |-- layout.js
-        |-- page.js
         |-- specialties
             |-- [specialty]
                 |-- page.js

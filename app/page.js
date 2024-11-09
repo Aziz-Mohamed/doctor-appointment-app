@@ -21,6 +21,7 @@ export default async function Home() {
   //       {redirect("/admin")}
   //     </SidebarProvider>
   //   );
+  
   if (admin) {
     return redirect("/admin");
   } else if (user) {

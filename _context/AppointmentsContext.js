@@ -1,6 +1,5 @@
 "use client"
-import { fetchAllAppointmentsFromSupabase } from '@/_lib/data-server';
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 export const AppointmentsContext = createContext({
   appointments: [],
@@ -9,19 +8,23 @@ export const AppointmentsContext = createContext({
 });
 
 
-export const AppointmentsProvider = ({ children }) => {
-  const [appointments, setAppointments] = useState([]);
-  const [filteredAppointments, setFilteredAppointments] = useState([]);
-  const [filters, setFilters] = useState({});
+export const AppointmentsProvider = ({ children, initialData }) => {
+  const [appointments, setAppointments] = useState(initialData || []);
+  const [filters, setFilters] = useState();
+  const [filteredAppointments, setFilteredAppointments] = useState(
+    filters ? [] : appointments
+  );
 
-  
+  console.log("appointments", appointments);
+  console.log("filteredAppointments", filteredAppointments);
+
   const handleFilterChange = (filter) => {
     setFilters(filter);
-    const filteredData = appointments.filter((appointment) => {
+    const filteredData = filter ? appointments.filter((appointment) => {
       return Object.keys(filter).every((key) => {
         return appointment[key] === filter[key];
       });
-    });
+    }) : appointments;
     setFilteredAppointments(filteredData);
   };
 
@@ -29,10 +32,10 @@ export const AppointmentsProvider = ({ children }) => {
     <AppointmentsContext.Provider
       value={{
         appointments,
-        setAppointments,
-        filteredAppointments,
-        setFilteredAppointments,
         filters,
+        filteredAppointments,
+        setAppointments,
+        setFilteredAppointments,
         setFilters,
         handleFilterChange,
       }}
@@ -52,7 +55,6 @@ export const useAppointments = () => {
   }
 
   const { appointments, setAppointments, filteredAppointments, setFilteredAppointments } = context;
-
   return { appointments, setAppointments, filteredAppointments, setFilteredAppointments };
 };
 

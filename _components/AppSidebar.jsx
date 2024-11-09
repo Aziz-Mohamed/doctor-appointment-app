@@ -1,8 +1,5 @@
 "use client";
 
-import React from "react";
-import InsertFakeBookingButton from "@/_components/InsertFakeBookingButton";
-import {getAppointmentsWithFilter} from "@/_lib/actions";
 import {
   Activity,
   Calendar,
@@ -17,6 +14,7 @@ import {
   Stethoscope,
   Users,
 } from "lucide-react";
+import React from "react";
 
 import {
   Collapsible,
@@ -37,11 +35,9 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  SidebarProvider,
-  SidebarRail,
+  SidebarRail
 } from "@/_components/ui/Sidebar";
 import Link from "next/link";
-import DynamicLink from "@/_components/DynamicLink";
 
 const coreFeatures = [
   {
@@ -119,8 +115,11 @@ const specialties = [
     ],
   },
 ];
+import { useAppointments } from "@/_context/AppointmentsContext";
+import {convertTitleToSlug} from "@/_lib/utils";
 
 export function AppSidebar() {
+  const { handleFilterChange } = useAppointments();
   return (
     // <SidebarProvider>
     <Sidebar collapsible="icon">
@@ -182,7 +181,9 @@ export function AppSidebar() {
                       <SidebarMenuSub>
                         {specialty.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild >
+                            <SidebarMenuSubButton asChild onClick={() =>{
+                              const specialtyName = convertTitleToSlug(item.title);
+                              handleFilterChange(specialtyName)}} >
                               <Link
                                 href={`/admin/specialties/${item.url}`}
                                 prefetch
