@@ -8,15 +8,6 @@ async function page({params}) {
     <AdminAccessProtectionServer>
       <div>
         This is the admin dashboard
-        {/* <ul style={{ border: "1px solid red", padding: "1em" }}>
-          {fetchedAppointments.map((appointment) => (
-            <li key={appointment.id}>
-              <span>appointmentStatus: {appointment.appointmentStatus}</span>
-              <span>...... </span>
-              <span>specialty: {appointment.specialty}</span>
-            </li>
-          ))}
-        </ul> */}
         <AppointmentsTable params={params} />
       </div>
 

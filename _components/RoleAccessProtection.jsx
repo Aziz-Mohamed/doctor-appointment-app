@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAdminData, getUserData } from "../_lib/customHooks";
+import { getAdminData, getUserData } from "@/_hooks/getUserData";
 import { Button } from "./ui/Button2";
 
 export function createRoleProtection(dataRetrievalFn) {

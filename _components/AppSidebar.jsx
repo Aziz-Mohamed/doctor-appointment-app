@@ -117,9 +117,12 @@ const specialties = [
 ];
 import { useAppointments } from "@/_context/AppointmentsContext";
 import {convertTitleToSlug} from "@/_lib/utils";
+import {useQueryParams} from "@/_hooks/useQueryParams";
 
 export function AppSidebar() {
   const { handleFilterChange } = useAppointments();
+  const { setQueryParam } = useQueryParams();
+
   return (
     // <SidebarProvider>
     <Sidebar collapsible="icon">
@@ -182,14 +185,16 @@ export function AppSidebar() {
                         {specialty.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
                             <SidebarMenuSubButton asChild onClick={() =>{
-                              const specialtyName = convertTitleToSlug(item.title);
-                              handleFilterChange(specialtyName)}} >
-                              <Link
+                              setQueryParam("specialty", item.title)
+                              // const specialtyName = convertTitleToSlug(item.title);
+                              // handleFilterChange(specialtyName)
+                              }} >
+                              {/* <Link
                                 href={`/admin/specialties/${item.url}`}
                                 prefetch
-                              >
+                              > */}
                                 <span>{item.title}</span>
-                              </Link>
+                              {/* </Link> */}
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

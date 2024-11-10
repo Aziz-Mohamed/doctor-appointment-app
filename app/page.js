@@ -4,7 +4,7 @@ import DateTimePicker from "@/_components/DateTimePicker";
 import GoogleOAuth from "@/_components/GoogleOAuth";
 import Link from "next/link";
 import Signout from "@/_components/Signout";
-import { getAdminData, getUserData } from "../_lib/customHooks";
+import { getAdminData, getUserData } from "@/_hooks/getUserData";
 import { redirect } from "next/navigation";
 import { SidebarProvider } from  "@/_components/ui/Sidebar";
 

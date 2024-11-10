@@ -17,6 +17,8 @@
     |-- RoleAccessProtection.jsx
     |-- Signout.jsx
     |-- Signup.jsx
+    |-- Spinner.jsx
+    |-- SpinnerMini.jsx
     |-- ui
         |-- Button.jsx
         |-- Button2.jsx
@@ -32,9 +34,12 @@
         |-- Tooltip.jsx
 |-- _context
     |-- AppointmentsContext.js
+|-- _hooks
+    |-- getUserData.js
+    |-- useMobile.js
+    |-- useQueryParams.js
 |-- _lib
     |-- actions.js
-    |-- customHooks.js
     |-- data-server.js
     |-- fakeAppointmentsData.js
     |-- supabase.js
@@ -44,8 +49,7 @@
     |-- admin
         |-- layout.js
         |-- specialties
-            |-- [specialty]
-                |-- page.js
+            |-- page.js
     |-- auth
         |-- callback
             |-- route.js
@@ -65,9 +69,6 @@
     |-- private
         |-- page.js
 |-- components.json
-|-- hooks
-    |-- use-mobile.jsx
-    |-- useMobile.js
 |-- jsconfig.json
 |-- next.config.mjs
 |-- package-lock.json
