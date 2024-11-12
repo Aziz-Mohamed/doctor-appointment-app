@@ -185,7 +185,8 @@ export function AppSidebar() {
                         {specialty.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
                             <SidebarMenuSubButton asChild onClick={() =>{
-                              setQueryParam("specialty", item.title)
+                              const specialtyName =  item.title.toLowerCase().replace(/\s+/g, '-');
+                              setQueryParam("specialty",specialtyName)
                               // const specialtyName = convertTitleToSlug(item.title);
                               // handleFilterChange(specialtyName)
                               }} >

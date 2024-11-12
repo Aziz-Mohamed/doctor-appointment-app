@@ -1,42 +1,64 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 
 export const AppointmentsContext = createContext({
   appointments: [],
   filteredAppointments: [],
-  filters: {},
+  // filters: {},
 });
 
 export const AppointmentsProvider = ({ children, initialData }) => {
   const [appointments, setAppointments] = useState(initialData || []);
-  const [filters, setFilters] = useState({});
+  // const [filters, setFilters] = useState({});
   const searchParams = useSearchParams();
 
   const filteredAppointments = useMemo(() => {
-    if (!searchParams || Object.keys(searchParams).length === 0) {
+    const paramsObject = Object.fromEntries(searchParams.entries());
+    console.log("paramsObject", paramsObject);
+    if (!paramsObject || Object.keys(paramsObject).length === 0) {
       return appointments;
     }
     return appointments.filter((appointment) => {
-      return Object.keys(searchParams).every((key) => {
-        return appointment[key] === searchParams[key];
+      return Object.keys(paramsObject).every((key) => {
+        return appointment[key] === paramsObject[key];
       });
     });
   }, [appointments, searchParams]);
 
-  const handleFilterChange = (filter) => {
-    setFilters(filter);
-  };
+  console.log("filteredAppointments", filteredAppointments);
+
+  // const filteredAppointments = useMemo(() => {
+  //   if (!searchParams || Object.keys(searchParams).length === 0) {
+  //     return appointments;
+  //   }
+  //   return appointments.filter((appointment) => {
+  //     return Object.keys(searchParams).every((key) => {
+  //       return appointment[key] === searchParams[key];
+  //     });
+  //   });
+  // }, [appointments, searchParams]);
+
+  //   const filteredAppointments = useMemo(() => {
+  //     if (!searchParams) {
+  //         return appointments;
+  //     }
+  //     return appointments.filter((appointment) => {
+  //         return Array.from(searchParams.entries()).every(([key, value]) => {
+  //             return appointment[key] === value;
+  //         });
+  //     });
+  // }, [appointments, searchParams]);
 
   return (
     <AppointmentsContext.Provider
       value={{
         appointments,
-        filters,
+        // filters,
         filteredAppointments,
         setAppointments,
-        setFilters,
-        handleFilterChange,
+        // setFilters,
+        // handleFilterChange,
       }}
     >
       {children}

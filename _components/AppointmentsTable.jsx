@@ -3,19 +3,9 @@
 import { useAppointments } from "@/_context/AppointmentsContext";
 import { useEffect, useState } from "react";
 
-export default function AppointmentsTable({ params }) {
-  const { filteredAppointments, handleFilterChange } = useAppointments();
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   if (params.specialty) {
-  //     handleFilterChange({ specialty: params.specialty });
-  //     setLoading(false); 
-  //   }
-  // }, [params]);
-
-  // if (loading) return <div>Loading...</div>;
-
+export default function AppointmentsTable() {
+  const { filteredAppointments } = useAppointments();
+  
   return (
     <>
       <div>Appointments Table</div>
