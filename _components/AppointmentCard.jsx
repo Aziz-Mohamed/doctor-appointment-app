@@ -37,7 +37,7 @@ function AppointmentCard({ appointment }) {
             {numGuests} guest{numGuests > 1 && "s"}
           </p> */}
           <p className="ml-auto text-sm text-primary-400">
-            Booked by User {userID}
+            Appointed by the patient {userID}
           </p>
         </div>
       </div>
@@ -47,6 +47,21 @@ function AppointmentCard({ appointment }) {
 }
 
 export default AppointmentCard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // function AppointmentCard({ appointment }) {

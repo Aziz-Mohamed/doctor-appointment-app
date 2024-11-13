@@ -6,7 +6,7 @@ function AppointmentsList({appointments}) {
     <ul className="space-y-6">
       {appointments
         ? appointments.map((appointment) => (
-            <AppointmentCard key = {Math.random()} appointment={appointment} />
+            <AppointmentCard key = {appointment.id} appointment={appointment} />
           ))
         : null}
     </ul>

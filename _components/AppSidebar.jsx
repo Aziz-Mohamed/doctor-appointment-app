@@ -35,7 +35,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  SidebarRail
+  SidebarRail,
 } from "@/_components/ui/Sidebar";
 import Link from "next/link";
 
@@ -116,8 +116,8 @@ const specialties = [
   },
 ];
 import { useAppointments } from "@/_context/AppointmentsContext";
-import {convertTitleToSlug} from "@/_lib/utils";
-import {useQueryParams} from "@/_hooks/useQueryParams";
+import { convertTitleToSlug } from "@/_lib/utils";
+import { useQueryParams } from "@/_hooks/useQueryParams";
 
 export function AppSidebar() {
   const { handleFilterChange } = useAppointments();
@@ -167,6 +167,16 @@ export function AppSidebar() {
           <SidebarGroupLabel>Medical Specialties</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+
+              <SidebarMenuSubButton
+                asChild
+                onClick={() => {
+                  setQueryParam("specialty", "all-specialties");
+                }}
+              >
+                <span>All Specialties</span>
+              </SidebarMenuSubButton>
+
               {specialties.map((specialty) => (
                 <Collapsible
                   key={specialty.category}
@@ -184,18 +194,16 @@ export function AppSidebar() {
                       <SidebarMenuSub>
                         {specialty.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild onClick={() =>{
-                              const specialtyName =  item.title.toLowerCase().replace(/\s+/g, '-');
-                              setQueryParam("specialty",specialtyName)
-                              // const specialtyName = convertTitleToSlug(item.title);
-                              // handleFilterChange(specialtyName)
-                              }} >
-                              {/* <Link
-                                href={`/admin/specialties/${item.url}`}
-                                prefetch
-                              > */}
-                                <span>{item.title}</span>
-                              {/* </Link> */}
+                            <SidebarMenuSubButton
+                              asChild
+                              onClick={() => {
+                                const specialtyName = item.title
+                                  .toLowerCase()
+                                  .replace(/\s+/g, "-");
+                                setQueryParam("specialty", specialtyName);
+                              }}
+                            >
+                              <span>{item.title}</span>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

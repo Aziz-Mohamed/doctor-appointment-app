@@ -5,14 +5,15 @@ import { AdminAccessProtectionServer } from "@/_components/RoleAccessProtection"
 async function page({params}) {
 
   return (
+<div className="w-full">
     <AdminAccessProtectionServer>
       <div>
-        This is the admin dashboard
         <AppointmentsTable params={params} />
       </div>
 
       <InsertFakeBookingButton />
     </AdminAccessProtectionServer>
+</div>
   );
 }
 

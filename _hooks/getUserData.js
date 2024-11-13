@@ -19,7 +19,7 @@ export async function getAdminData(serverOrClient = "server") {
     serverOrClient === "server" ? ServerSupabase() : ClientSupabase();
 
   const { data, error } = await supabase.auth.getUser();
-  console.log("getAdminData", data);
+  // console.log("getAdminData", data);
   if (error || !data?.user) return null;
 
   const userId = data.user.id;

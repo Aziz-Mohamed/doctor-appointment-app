@@ -31,6 +31,7 @@
         |-- Sheet.jsx
         |-- Sidebar.jsx
         |-- Skeleton.jsx
+        |-- Table.jsx
         |-- Tooltip.jsx
 |-- _context
     |-- AppointmentsContext.js
