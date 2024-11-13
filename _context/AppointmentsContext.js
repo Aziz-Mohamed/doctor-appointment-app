@@ -50,3 +50,4 @@ export const useAppointments = () => {
 
   return context;
 };
+
