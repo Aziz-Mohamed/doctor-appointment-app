@@ -47,7 +47,7 @@ export const useAppointments = () => {
       "useAppointments must be used within an AppointmentsProvider"
     );
   }
-
+console.log("context", context)
   return context;
 };
 

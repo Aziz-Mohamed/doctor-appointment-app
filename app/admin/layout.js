@@ -9,10 +9,10 @@ import { fetchAllAppointmentsFromSupabase } from "@/_lib/data-server";
 import "@/app/globals.css";
 
 export default async function Layout({ children }) {
-  const fetchedAppointments = await fetchAllAppointmentsFromSupabase();
+  // const fetchedAppointments = await fetchAllAppointmentsFromSupabase();
 
   return (
-    <AppointmentsProvider initialData={fetchedAppointments}>
+    // <AppointmentsProvider initialData={fetchedAppointments}>
       <SidebarProvider>
         <div className="flex h-screen overflow-hidden">
           <AppSidebar />
@@ -24,6 +24,6 @@ export default async function Layout({ children }) {
           </SidebarInset>
         </div>
       </SidebarProvider>
-    </AppointmentsProvider>
+    // </AppointmentsProvider>
   );
 }

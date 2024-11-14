@@ -16,7 +16,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/_components/ui/Select";
 import {
   Tooltip,
@@ -24,8 +24,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/_components/ui/Tooltip";
-
-
+import { useCallback, useState } from "react";
+import { updateAppointmentStatus } from "@/_lib/actions";
+import { toast } from "sonner";
 
 const TruncatedCell = ({ content }) => (
   <TooltipProvider>
@@ -38,11 +39,30 @@ const TruncatedCell = ({ content }) => (
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
-)
-
+);
 
 export default function AppointmentsTable() {
-  const { filteredAppointments: appointmentData } = useAppointments();
+  const [sort, setSort] = useState("");
+  const { filteredAppointments, setAppointments } = useAppointments();
+
+  const handleStatusChange = useCallback(
+    (id, newStatus) => {
+      const data = updateAppointmentStatus(id, newStatus);
+      if (!data) {
+        alert("There was a problem. Please try again later.");
+        return;
+      }
+      setAppointments((prevData) =>
+        prevData.map((appointment) =>
+          appointment.id === id
+            ? { ...appointment, appointmentStatus: newStatus }
+            : appointment
+        )
+      );
+      toast("Status has been updated Successfully.");
+    },
+    [setAppointments]
+  );
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -61,63 +81,89 @@ export default function AppointmentsTable() {
 
   return (
     <>
-
-<div className="w-full overflow-x-auto">
-      <Table className="w-full table-fixed">
-        <TableCaption>A list of appointments.</TableCaption>
-        <TableHeader>
-          <TableRow className="bg-gray-100">
-            <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">ID</TableHead>
-            <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">Doctor ID</TableHead>
-            <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">Date</TableHead>
-            <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">Time</TableHead>
-            <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">Status</TableHead>
-            <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">User ID</TableHead>
-            <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">Specialty</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {appointmentData.map((appointment) => (
-            <TableRow key={appointment.id} className="border-b">
-              <TableCell className="py-3 px-4 text-sm"> <TruncatedCell content={appointment.id} /> </TableCell>
-              <TableCell className="py-3 px-4 text-sm">{appointment.doctorID}</TableCell>
-              <TableCell className="py-3 px-4 text-sm">{appointment.appointmentDate}</TableCell>
-              <TableCell className="py-3 px-4 text-sm">{appointment.appointmentTime}</TableCell>
-              <TableCell className="py-3 px-4 text-sm">
-                <Select
-                  onValueChange={(value) => handleStatusChange(appointment.id, value)}
-                  defaultValue={appointment.appointmentStatus}
-                >
-                  <SelectTrigger className={`w-full ${getStatusColor(appointment.appointmentStatus)}`}>
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="confirmed">Confirmed</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="canceled">Canceled</SelectItem>
-                  </SelectContent>
-                </Select>
-              </TableCell>
-              <TableCell className="py-3 px-4 text-sm">{appointment.userID}</TableCell>
-              <TableCell className="py-3 px-4 text-sm">{appointment.specialty}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <div>
+      
     </div>
+      <div className="w-full overflow-x-auto">
+        <Table className="w-full table-fixed">
+          <TableCaption>A list of appointments.</TableCaption>
+          <TableHeader>
+            <TableRow className="bg-gray-100">
+              <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                ID
+              </TableHead>
+              <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Doctor ID
+              </TableHead>
+              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Date
+              </TableHead>
+              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Time
+              </TableHead>
+              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Status
+              </TableHead>
+              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                User ID
+              </TableHead>
+              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Specialty
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredAppointments.map((appointment) => (
+              <TableRow key={appointment.id} className="border-b">
+                <TableCell className="py-3 px-4 text-sm">
+                  {" "}
+                  <TruncatedCell content={appointment.id} />{" "}
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.doctorID}
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.appointmentDate}
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.appointmentTime}
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  <Select
+                    onValueChange={(value) =>
+                      handleStatusChange(appointment.id, value)
+                    }
+                    defaultValue={appointment.appointmentStatus}
+                  >
+                    <SelectTrigger
+                      className={`w-full ${getStatusColor(
+                        appointment.appointmentStatus
+                      )}`}
+                    >
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="confirmed">Confirmed</SelectItem>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="completed">Completed</SelectItem>
+                      <SelectItem value="canceled">Canceled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.userID}
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.specialty}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
-
-
-
-
-
-
-
-
-{/* // The same table but with divs instead of Table component */}
-
-       {/* <div className="w-full overflow-x-auto">
+      {/* // The same table but with divs instead of Table component */}
+      {/* <div className="w-full overflow-x-auto">
       <div className="min-w-full">
         <div className="grid grid-cols-12 gap-4 py-3 px-4 text-sm font-medium text-gray-500 bg-gray-100">
           <div className="col-span-1">ID</div>
@@ -158,55 +204,6 @@ export default function AppointmentsTable() {
         </div>
       </div>
     </div> */}
-
-
-
-
-
-
-      {/* <Table className="w-full">
-        <TableCaption>A list of appointments.</TableCaption>
-        <TableHeader>
-          <TableRow className="items-center justify-between gap-x-2">
-            <TableHead className="flex-1">Doctor ID</TableHead>
-            <TableHead className="flex-1">Date</TableHead>
-            <TableHead className="flex-1">Time</TableHead>
-            <TableHead className="flex-1">Status</TableHead>
-            <TableHead className="flex-1">User ID</TableHead>
-            <TableHead className="flex-1">Specialty</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredAppointments.map((appointment) => (
-            <TableRow key={appointment.id} className="items-center justify-between gap-x-2">
-              <TableCell className="flex-1">{appointment.doctorID}</TableCell>
-              <TableCell className="flex-1">{appointment.appointmentDate}</TableCell>
-              <TableCell className="flex-1">{appointment.appointmentTime}</TableCell>
-              <TableCell className="flex-1" >
-                <Select
-                  
-                  onValueChange={() => {  console.log(appointment.appointmentStatus)}}
-                  defaultValue={appointment.appointmentStatus}
-                >
-                  <SelectTrigger className={`w-full ${getStatusColor(appointment.appointmentStatus)}`} >
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent >
-                    <SelectItem value="confirmed">Confirmed</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="canceled">Canceled</SelectItem>
-                  </SelectContent>
-                </Select>
-              </TableCell>
-              <TableCell className="flex-1">{appointment.userID}</TableCell>
-              <TableCell className="flex-1">{appointment.specialty}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table> */}
     </>
   );
 }
-
-

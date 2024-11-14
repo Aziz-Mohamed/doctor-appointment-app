@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import {
   fetchAllAppointmentsFromSupabase,
   insertAppointmentToSupabase,
+  updateAppointmentToSupabase,
 } from "@/_lib/data-server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -52,11 +53,9 @@ export async function signUpNewUser(formData) {
 }
 
 export async function signInWithGoogleOAuth() {
-  // 1. Create a Supabase client
   const supabase = createClient();
   const origin = headers().get("origin");
   // console.log("origin", origin);
-  // 2. Sign in with GitHub
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -73,7 +72,6 @@ export async function signInWithGoogleOAuth() {
   } else {
     return redirect(data.url);
   }
-  // 3. Redirect to landing page
 }
 
 export async function signout() {
@@ -106,6 +104,18 @@ export async function createAppointment(formData) {
   const appointments = await insertAppointmentToSupabase(rawFormData);
   return appointments;
 }
+
+
+//UPDATE
+export async function updateAppointmentStatus(id, newStatus) {
+  await updateAppointmentToSupabase({id, appointmentStatus: newStatus});
+  revalidatePath("/admin/specialties");
+}
+
+
+
+
+
 
 
 

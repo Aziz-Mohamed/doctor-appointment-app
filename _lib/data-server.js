@@ -70,3 +70,27 @@ export async function insertAppointmentToSupabase({
 
   return data;
 }
+
+
+
+//UPDATE DATA
+export async function updateAppointmentToSupabase({id,  userID, doctorID, appointmentDate, appointmentTime, appointmentStatus, specialty }) {
+  const { data, error } = await supabase
+    .from("appointments")
+    .update({
+      userID: Number(userID),
+      doctorID: Number(doctorID),
+      appointmentDate: appointmentDate,
+      appointmentTime: appointmentTime,
+      appointmentStatus: String(appointmentStatus),
+      updatedAt: new Date(),
+      specialty: specialty,
+    })
+    .eq("id", id)
+    .select();
+  // console.log(data)
+  if (error) {
+    console.error(error);
+    return null;
+  }
+}

@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,7 +49,8 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        {children}
+        <main>{children}</main>
+        <Toaster/>
       </body>
     </html>
   );
