@@ -10,16 +10,20 @@ export const AppointmentsContext = createContext({
 export const AppointmentsProvider = ({ children, initialData }) => {
   const [appointments, setAppointments] = useState(initialData || []);
   const searchParams = useSearchParams();
+  const keyMapping = {
+    status: 'appointmentStatus',
+  };
 
   const filteredAppointments = useMemo(() => {
     const paramsObject = Object.fromEntries(searchParams.entries());
-    console.log("paramsObject", paramsObject);
+
     if (!paramsObject || Object.keys(paramsObject).length === 0 || paramsObject.specialty === "all-specialties") {
       return appointments;
     }
     return appointments.filter((appointment) => {
       return Object.keys(paramsObject).every((key) => {
-        return appointment[key] === paramsObject[key];
+        const mappedKey = keyMapping[key] || key;
+        return appointment[mappedKey] === paramsObject[key];
       });
     });
   }, [appointments, searchParams]);

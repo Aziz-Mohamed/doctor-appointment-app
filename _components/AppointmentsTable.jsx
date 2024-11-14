@@ -24,9 +24,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/_components/ui/Tooltip";
-import { useCallback, useState } from "react";
 import { updateAppointmentStatus } from "@/_lib/actions";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
+import StatusFilterButtons from "@/_components/StatusFilterButtons";
 
 const TruncatedCell = ({ content }) => (
   <TooltipProvider>
@@ -81,8 +82,8 @@ export default function AppointmentsTable() {
 
   return (
     <>
-    <div>
-      
+    <div className="flex justify-end mb-4">
+      <StatusFilterButtons/>
     </div>
       <div className="w-full overflow-x-auto">
         <Table className="w-full table-fixed">
