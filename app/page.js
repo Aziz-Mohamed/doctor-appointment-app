@@ -23,7 +23,7 @@ export default async function Home() {
   //   );
   
   if (admin) {
-    return redirect("/admin");
+    return redirect("/admin/specialties");
   } else if (user) {
     return redirect("/dashboard");
   } else {
