@@ -68,13 +68,13 @@ export default function AppointmentsTable() {
   const getStatusColor = (status) => {
     switch (status) {
       case "confirmed":
-        return "bg-green-500 text-primary-foreground";
+        return "bg-green-100 text-primary";
       case "pending":
-        return "bg-yellow-500 text-primary-foreground";
+        return "bg-yellow-100 text-primary";
       case "completed":
-        return "bg-blue-500 text-primary-foreground";
+        return "bg-blue-100 text-primary";
       case "canceled":
-        return "bg-red-500 text-primary-foreground";
+        return "bg-red-100 text-primary";
       default:
         return "";
     }

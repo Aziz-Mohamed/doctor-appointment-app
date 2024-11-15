@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 const statuses = [
   { 
-    status: 'all', 
+    status: '', 
     label: 'All', 
     className: 'bg-gray-100 text-gray-700 hover:bg-gray-200', 
     activeClassName: 'bg-gray-500 text-white'

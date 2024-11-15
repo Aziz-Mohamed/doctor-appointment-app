@@ -167,7 +167,7 @@ export function AppSidebar() {
               <SidebarMenuSubButton
                 asChild
                 onClick={() => {
-                  setQueryParam("specialty", "all-specialties");
+                  setQueryParam("specialty", "");
                 }}
               >
                 <span>All Specialties</span>
@@ -252,3 +252,11 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
+
+
+
+
+
+
+

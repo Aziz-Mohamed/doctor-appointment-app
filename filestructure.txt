@@ -65,14 +65,17 @@
         |-- page.js
     |-- error
         |-- page.js
+    |-- error.js
     |-- fonts
         |-- GeistMonoVF.woff
         |-- GeistVF.woff
     |-- globals.css
     |-- layout.js
+    |-- loading.js
     |-- login
         |-- actions.js
         |-- page.js
+    |-- not-found.js
     |-- page.js
     |-- private
         |-- page.js
