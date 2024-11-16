@@ -20,6 +20,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["next-env.d.js", "**/*.js", "_components/SpinnerMini.jsx", "_components/Spinner.jsx"],
+  "include": ["next-env.d.js", "**/*.js", "_components/SpinnerMini.jsx", "_components/Spinner.jsx", "app/login/page.js"],
   "exclude": ["node_modules"]
 }

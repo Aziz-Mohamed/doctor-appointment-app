@@ -8,13 +8,15 @@ export function createRoleProtection(dataRetrievalFn) {
 
     if (!result) {
       return (
-        <div>
-          <p>
-            You are not logged in or not authorized , if so login with the
+        <div className="flex flex-col items-center bg-background p-4 rounded-lg shadow-lg">
+          <p className="text-2xl text-primary">
+            You are not logged in or not authorized, if so login with the
             authorized account pls.
           </p>
-          <Link href={"/login"}>
-            <Button> Login</Button>
+          <Link href={"/"}>
+            <Button className="mt-4" variant="outline">
+              Login
+            </Button>
           </Link>
         </div>
       );

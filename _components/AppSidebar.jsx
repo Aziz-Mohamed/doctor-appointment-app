@@ -39,6 +39,7 @@ import {
 } from "@/_components/ui/Sidebar";
 import { useQueryParams } from "@/_hooks/useQueryParams";
 import Link from "next/link";
+import Signout from "@/_components/Signout";
 
 const coreFeatures = [
   {
@@ -245,6 +246,12 @@ export function AppSidebar() {
                 </div>
               </div>
             </div>
+
+
+            <div className="flex items-center justify-center mt-auto py-4">
+              <Signout className="bg-primary text-primary-foreground" />
+            </div>
+
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

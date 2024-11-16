@@ -1,4 +1,4 @@
-import { signInWithGoogleOAuth } from "../_lib/actions";
+import { signInWithGoogleOAuth } from "@/_lib/actions";
 
 export default function GoogleOAuth() {
   return (

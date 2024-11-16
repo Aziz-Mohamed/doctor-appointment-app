@@ -1,6 +1,5 @@
 import GoogleOAuth from "@/_components/GoogleOAuth";
 import Signup from "@/_components/Signup";
-import { loginWithPassword, signupWithPassword } from "./actions";
 
 export default function LoginPage() {
   return (
@@ -19,3 +18,16 @@ export default function LoginPage() {
     // </form>
   );
 }
+
+
+
+
+// import { LoginForm } from "@/_components/LoginForm";
+
+// export default function Page() {
+//   return (
+//     <div className="flex h-screen w-full items-center justify-center px-4">
+//       <LoginForm />
+//     </div>
+//   );
+// }

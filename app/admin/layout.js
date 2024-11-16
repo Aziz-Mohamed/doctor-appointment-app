@@ -1,18 +1,16 @@
 import { AppSidebar } from "@/_components/AppSidebar";
+import { AdminAccessProtectionServer } from "@/_components/RoleAccessProtection";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/_components/ui/Sidebar";
-import { AppointmentsProvider } from "@/_context/AppointmentsContext";
-import { fetchAllAppointmentsFromSupabase } from "@/_lib/data-server";
 import "@/app/globals.css";
-
 export default async function Layout({ children }) {
-  // const fetchedAppointments = await fetchAllAppointmentsFromSupabase();
+
 
   return (
-    // <AppointmentsProvider initialData={fetchedAppointments}>
+    <AdminAccessProtectionServer>
       <SidebarProvider>
         <div className="flex h-screen overflow-hidden">
           <AppSidebar />
@@ -24,6 +22,6 @@ export default async function Layout({ children }) {
           </SidebarInset>
         </div>
       </SidebarProvider>
-    // </AppointmentsProvider>
+    </AdminAccessProtectionServer>
   );
 }

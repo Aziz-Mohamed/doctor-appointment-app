@@ -11,11 +11,11 @@ export const AppointmentsProvider = ({ children, initialData }) => {
   const [appointments, setAppointments] = useState(initialData || []);
   const searchParams = useSearchParams();
 
-  const keyMapping = {
-    status: "appointmentStatus",
-  };
-
+  
   const filteredAppointments = useMemo(() => {
+    const keyMapping = {
+      status: "appointmentStatus",
+    };
     const paramsObject = Object.fromEntries(searchParams.entries());
     console.log("paramsObject", paramsObject);
     if (
