@@ -43,7 +43,8 @@ export async function signUpNewUser(formData) {
     password: formData?.get("password"),
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // wait for 2 seconds
+  console.log("signUpNewUser", data)
+  // await new Promise((resolve) => setTimeout(resolve, 2000)); // wait for 2 seconds
 
   if (error) {
     console.error("Signup error:", error.message);
@@ -53,6 +54,25 @@ export async function signUpNewUser(formData) {
   revalidatePath("/", "layout");
   redirect("/");
 }
+
+
+export async function signInUser(formData) {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData?.get("email"),
+    password: formData?.get("password"),
+  });
+
+  console.log("signInUser", data)
+
+  if (error) {
+    console.error("Login error:", error.message);
+    redirect("/error");
+  }
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
 
 export async function signInWithGoogleOAuth() {
   const supabase = createClient();

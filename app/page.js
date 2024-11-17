@@ -27,8 +27,22 @@ export default async function Home() {
           />
         </div>
 
-        <div className="z-10">
-          <div className="flex h-screen w-full items-center justify-center px-4">
+        <div className="z-10 flex w-screen h-screen">
+          <div className="flex flex-col items-center justify-center flex-1 ">
+            <div className="flex flex-col items-center justify-center flex-1 pl-4 pb-10 max-w-2xl">
+              <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl px-8 text-sky-950	mr-auto">
+                Join our community today! <br />
+              </h1>
+              <p className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl px-8 text-sky-950	mt-4  ">
+                <b> Sign up </b>
+                <span className="text-slate-900 font-normal">
+                  now to reserve your appointment and access your health records.
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center mx-8 px-16 bg-gradient-to-br from-transparent via-blue-50 to-transparent ">
             <LoginForm />
           </div>
         </div>
