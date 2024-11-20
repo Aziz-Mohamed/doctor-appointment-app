@@ -1,18 +1,37 @@
-import React from "react";
-import { Appointments } from "@/_components/Appointments";
-import DateTimePicker from "@/_components/DateTimePicker";
 import { UserAccessProtectionServer } from "@/_components/RoleAccessProtection";
-import Signout from "@/_components/Signout";
+import { DoctorsProvider } from "@/_context/DoctorsContext";
+import { fetchFilteredDoctorsFromSupabase } from "@/_lib/data-server";
+import { Suspense } from "react";
 
-function page() {
+
+
+async function page({ searchParams }) {
+  // const filter = [
+  //   {
+  //     column: "specialty",
+  //     value: searchParams?.specialty || "",
+  //   },
+  //   {
+  //     column: "doctorName",
+  //     value: searchParams?.doctorName || "",
+  //   },
+  // ];
+
+  const fetchedDoctorsList = await fetchFilteredDoctorsFromSupabase(searchParams);
+
+  console.log("searchParams", searchParams);
+  console.log("fetchedDoctorsList", fetchedDoctorsList);
+
   return (
     <UserAccessProtectionServer>
-      <div>
-        This is the user dashboard
-        <DateTimePicker />
-        <Appointments />
-        <Signout />
-      </div>
+      <DoctorsProvider initialData={fetchedDoctorsList}>
+        <h1> Doctors list </h1>
+        <Suspense fallback={<p>Loading doctors...</p>}>
+        <p className="text-lg z-50" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+        </p>
+          <pre>{JSON.stringify(fetchedDoctorsList, null, 2)}</pre>
+        </Suspense>
+      </DoctorsProvider>
     </UserAccessProtectionServer>
   );
 }

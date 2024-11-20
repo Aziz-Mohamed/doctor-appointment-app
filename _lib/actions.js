@@ -3,6 +3,7 @@ import { fakeAppointmentsData } from "@/_lib/fakeAppointmentsData";
 import { createClient } from "@/utils/supabase/server";
 import {
   fetchAllAppointmentsFromSupabase,
+  fetchFilteredDoctorsFromSupabase,
   insertAppointmentToSupabase,
   updateAppointmentToSupabase,
 } from "@/_lib/data-server";
@@ -33,6 +34,12 @@ const filteredAppointments = await fetchMultiFilteredAppointmentsFromSupabase(fi
 return filteredAppointments
 }
 
+
+export async function getFilteredDoctors(filter) {
+  const doctors = await fetchFilteredDoctorsFromSupabase(filter);
+  revalidatePath("/dashboard", "page");
+  return doctors;
+}
 
 //AUTH
 export async function signUpNewUser(formData) {
@@ -103,8 +110,6 @@ export async function signout() {
     console.error("Error signing out:", error.message);
     return;
   }
-
-  window.history.pushState(null, "", "/");
   revalidatePath("/", "layout");
   redirect("/");
 }

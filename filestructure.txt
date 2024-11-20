@@ -10,14 +10,17 @@
     |-- AppointmentsTable.jsx
     |-- Button.jsx
     |-- DateTimePicker.jsx
+    |-- DropDownMenu.jsx
     |-- DynamicLink.jsx
     |-- GoogleOAuth.jsx
     |-- InsertFakeBookingButton.jsx
     |-- LoginForm.jsx
     |-- ManualInput.jsx
     |-- RoleAccessProtection.jsx
+    |-- SearchPanel.jsx
     |-- Signout.jsx
     |-- Signup.jsx
+    |-- SlideShowBG.jsx
     |-- Spinner.jsx
     |-- SpinnerMini.jsx
     |-- StatusFilterButtons.jsx
@@ -28,6 +31,7 @@
         |-- Collapsible.jsx
         |-- Command.jsx
         |-- Dialog.jsx
+        |-- Drawer.jsx
         |-- Input.jsx
         |-- Label.jsx
         |-- Popover.jsx
@@ -41,6 +45,7 @@
         |-- Tooltip.jsx
 |-- _context
     |-- AppointmentsContext.js
+    |-- DoctorsContext.js
 |-- _hooks
     |-- getUserData.js
     |-- useMobile.js
@@ -52,6 +57,7 @@
     |-- filtering.js
     |-- multiFiltering.js
     |-- sorting.js
+    |-- specialties.js
     |-- supabase.js
     |-- utils.js
 |-- app
@@ -64,6 +70,7 @@
         |-- callback
             |-- route.js
     |-- dashboard
+        |-- layout.js
         |-- page.js
     |-- error
         |-- page.js
@@ -89,6 +96,10 @@
 |-- postcss.config.mjs
 |-- public
     |-- blur-hospital.jpg
+    |-- dentist-chair.jpg
+    |-- doctor.jpg
+    |-- hospital-building.jpg
+    |-- hospital-hall-2.jpg
     |-- medical-heart.jpg
 |-- tailwind.config.js
 |-- utils

@@ -6,6 +6,7 @@ export const useQueryParams = (serverOrClient = "client") => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // Use it when you only want to change ONE query param
     const setQueryParam = (query, filter) => {
         const params = new URLSearchParams(serverOrClient === "client" ? searchParams: window.location.search);
 
@@ -18,6 +19,17 @@ export const useQueryParams = (serverOrClient = "client") => {
         router.replace(`${serverOrClient === "client" ? pathname : window.location.pathname}?${params.toString()}`, { shallow: true }, { scroll: false });
     };
 
-    return { setQueryParam };
+// Use it when you want to change MULTIPLE query params
+    const setMultiQueryParams = (queries) => {
+        const params = new URLSearchParams(serverOrClient === "client" ? searchParams : window.location.search);
+
+        Object.entries(queries).forEach(([key, value]) => {
+          value?.toString() && params.set(key, value);
+        });
+
+        router.replace(`${serverOrClient === "client" ? pathname : window.location.pathname}?${params?.toString()}`, { shallow: true }, { scroll: false });
+    };
+    
+    return { setQueryParam, setMultiQueryParams };
 };
 

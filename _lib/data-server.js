@@ -1,6 +1,7 @@
 import supabase from "./supabase";
 
 
+
 // FETCH DATA
 export async function fetchAllAppointmentsFromSupabase() {
   const { data: appointments, error } = await supabase
@@ -36,6 +37,44 @@ export async function fetchMultiFilteredAppointmentsFromSupabase(filters) {
     appointments.eq(filter.column, filter.value);
   });
 }
+
+
+// export async function fetchFilteredDoctorsFromSupabase(filter = null) {
+//   const { data: doctors, error } = await supabase
+//     .from("doctors")
+//     .select("*")
+//     .eq(filter?.column, filter?.value);
+//     if(error){
+//       console.error(error);
+//       return null;
+//     }
+//   return doctors;
+// }
+
+
+export async function fetchFilteredDoctorsFromSupabase(filters = {}) {
+  // Start the query
+  let query = supabase.from("doctors").select("*");
+
+  // Apply filters dynamically
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) {
+      query = query.eq(key, value);
+    }
+  });
+
+  const { data: doctors, error } = await query;
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+  
+  return doctors;
+}
+
+
+
 
 
 // INSERT DATA
