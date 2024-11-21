@@ -7,7 +7,7 @@ export default async function Layout({ children }) {
   return (
     <UserAccessProtectionServer>
       <div className="h-screen ">
-        <div className="flex min-h-[60vh] overflow-hidden mb-16">
+        <div className="relative flex min-h-[60vh] overflow-hidden mb-16">
           <div className="flex flex-col">
             <div className="flex items-center gap-2 p-4 z-50">
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -23,7 +23,7 @@ export default async function Layout({ children }) {
               </p>
               <SearchPanel />
             </div>
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 h-full w-full z-0">
               <SlideShowBG />
             </div>
           </div>
@@ -33,3 +33,4 @@ export default async function Layout({ children }) {
     </UserAccessProtectionServer>
   );
 }
+

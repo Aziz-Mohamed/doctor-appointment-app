@@ -1,5 +1,4 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import { createContext, useContext } from "react";
 
 export const DoctorContext = createContext({
@@ -7,7 +6,6 @@ export const DoctorContext = createContext({
 });
 
 export const DoctorsProvider = ({ children, initialData }) => {
-  const searchParams = useSearchParams();
 const doctors = initialData || [];  
   return (
     <DoctorContext.Provider

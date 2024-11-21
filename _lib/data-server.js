@@ -1,7 +1,5 @@
 import supabase from "./supabase";
 
-
-
 // FETCH DATA
 export async function fetchAllAppointmentsFromSupabase() {
   const { data: appointments, error } = await supabase
@@ -38,22 +36,24 @@ export async function fetchMultiFilteredAppointmentsFromSupabase(filters) {
   });
 }
 
+// Use it with the "params" in dynamic routes
+export async function fetchFilteredDoctorsFromSupabase(filter = null) {
+  const { data: doctors, error } = await supabase
+    .from("doctors")
+    .select("*")
+    .eq(filter?.column, filter?.value);
+  if (error) {
+    console.error(error);
+    return null;
+  }
+  return doctors;
+}
 
-// export async function fetchFilteredDoctorsFromSupabase(filter = null) {
-//   const { data: doctors, error } = await supabase
-//     .from("doctors")
-//     .select("*")
-//     .eq(filter?.column, filter?.value);
-//     if(error){
-//       console.error(error);
-//       return null;
-//     }
-//   return doctors;
-// }
-
-
-export async function fetchFilteredDoctorsFromSupabase(filters = {}) {
-  let query = supabase.from("doctors").select("*");
+// Use it with multi-filters like in the SearchPanel - but "ilike" is not working with params search in dynamic routes
+export async function fetchMultiFilteredDoctorsFromSupabase(filters) {
+  let query = supabase
+    .from("doctors")
+    .select("id, doctorName, specialty, rate, created_at, doctorID");
 
   Object.entries(filters).forEach(([key, value]) => {
     if (value) {
@@ -61,21 +61,17 @@ export async function fetchFilteredDoctorsFromSupabase(filters = {}) {
     }
   });
   // console.log('thequery: ',query);
-  
+
   const { data: doctors, error } = await query;
-  // console.log('doctors: ',doctors);
-  
+  // console.log('doctors from data-server: ',doctors);
+
   if (error) {
     console.error(error);
     return null;
   }
-  
+
   return doctors;
 }
-
-
-
-
 
 // INSERT DATA
 export async function insertAppointmentToSupabase({
@@ -110,10 +106,16 @@ export async function insertAppointmentToSupabase({
   return data;
 }
 
-
-
 //UPDATE DATA
-export async function updateAppointmentToSupabase({id,  userID, doctorID, appointmentDate, appointmentTime, appointmentStatus, specialty }) {
+export async function updateAppointmentToSupabase({
+  id,
+  userID,
+  doctorID,
+  appointmentDate,
+  appointmentTime,
+  appointmentStatus,
+  specialty,
+}) {
   const { data, error } = await supabase
     .from("appointments")
     .update({

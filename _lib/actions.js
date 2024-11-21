@@ -3,14 +3,13 @@ import { fakeAppointmentsData } from "@/_lib/fakeAppointmentsData";
 import { createClient } from "@/utils/supabase/server";
 import {
   fetchAllAppointmentsFromSupabase,
-  fetchFilteredDoctorsFromSupabase,
+  fetchMultiFilteredDoctorsFromSupabase,
   insertAppointmentToSupabase,
   updateAppointmentToSupabase,
 } from "@/_lib/data-server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
-
 
 //GET
 export async function getAppointments() {
@@ -19,24 +18,25 @@ export async function getAppointments() {
   return appointments;
 }
 
-
 export async function getAppointmentsWithFilter(filter) {
   // filters is an object with column and value
- const filteredAppointments = await fetchFilteredAppointmentsFromSupabase(filter);
- console
- return filteredAppointments
+  const filteredAppointments = await fetchFilteredAppointmentsFromSupabase(
+    filter
+  );
+  console;
+  return filteredAppointments;
 }
-
 
 export async function getAppointmentsWithFilters(filters) {
   // filters is array of objects with column and value
-const filteredAppointments = await fetchMultiFilteredAppointmentsFromSupabase(filters);
-return filteredAppointments
+  const filteredAppointments = await fetchMultiFilteredAppointmentsFromSupabase(
+    filters
+  );
+  return filteredAppointments;
 }
 
-
 export async function getFilteredDoctors(filter) {
-  const doctors = await fetchFilteredDoctorsFromSupabase(filter);
+  const doctors = await fetchMultiFilteredDoctorsFromSupabase(filter);
   revalidatePath("/dashboard", "page");
   return doctors;
 }
@@ -62,7 +62,6 @@ export async function signUpNewUser(formData) {
   redirect("/");
 }
 
-
 export async function signInUser(formData) {
   const supabase = createClient();
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -70,7 +69,7 @@ export async function signInUser(formData) {
     password: formData?.get("password"),
   });
 
-  console.log("signInUser", data)
+  console.log("signInUser", data);
 
   if (error) {
     console.error("Login error:", error.message);
@@ -79,7 +78,6 @@ export async function signInUser(formData) {
   revalidatePath("/", "layout");
   redirect("/");
 }
-
 
 export async function signInWithGoogleOAuth() {
   const supabase = createClient();
@@ -114,9 +112,6 @@ export async function signout() {
   redirect("/");
 }
 
-
-
-
 //CREATE
 export async function createAppointment(formData) {
   const rawFormData = formData
@@ -133,20 +128,11 @@ export async function createAppointment(formData) {
   return appointments;
 }
 
-
 //UPDATE
 export async function updateAppointmentStatus(id, newStatus) {
-  await updateAppointmentToSupabase({id, appointmentStatus: newStatus});
+  await updateAppointmentToSupabase({ id, appointmentStatus: newStatus });
   revalidatePath("/admin/specialties");
 }
-
-
-
-
-
-
-
-
 
 export async function insertFakeAppointments() {
   const fakeAppointments = [
@@ -274,7 +260,7 @@ export async function insertFakeAppointments() {
       userID: "cc3cc333-33cc-33c3-3c3c-3333cc3c3c3c",
       specialty: "cardiology",
     },
-      // Dermatology
+    // Dermatology
     {
       doctorID: 13,
       appointmentDate: "2024-11-10",

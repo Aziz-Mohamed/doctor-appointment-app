@@ -1,3 +1,4 @@
+"use client"
 import { Star, User, Calendar } from 'lucide-react'
 
 import { Card, CardContent } from "@/_components/ui/Card"
@@ -28,8 +29,8 @@ export default function DoctorList({ doctors = [] }) {
                   <span className="text-sm font-medium">{doctor.rate.toFixed(1)}</span>
                 </div>
               </div>
-              <Link href="" className="hover:cursor-pointer focus:cursor-pointer" >
-                <Button className="ml-auto bg-slate-100 " size="sm" variant="outline">
+              <Link href={`/dashboard/${doctor.doctorID}`} >
+                <Button className="ml-auto border-slate-200 shadow-sm hover:shadow-md active:shadow-lg transition-shadow duration-200 focus:outline-none focus:ring-offset-2 focus:ring-slate-300" size="sm" variant="outline">
                   <Calendar className="h-4 w-4 mr-2" />
                   Schedule Appointment
                 </Button>

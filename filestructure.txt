@@ -5,6 +5,7 @@
 |-- _components
     |-- AppSidebar.jsx
     |-- AppointmentCard.jsx
+    |-- AppointmentReservationForm.jsx
     |-- Appointments.jsx
     |-- AppointmentsList.jsx
     |-- AppointmentsTable.jsx
