@@ -5,6 +5,7 @@ import { Button } from "@/_components/ui/Button";
 import Image from "next/image";
 import blurHospital from "@/public/blur-hospital.jpg";
 import { LoginForm } from "@/_components/LoginForm";
+import { Heart } from "lucide-react";
 
 export default async function Home() {
   const { roleData: admin } = (await getAdminData()) ?? {};
@@ -17,6 +18,14 @@ export default async function Home() {
   } else {
     return (
       <div className="relative h-screen w-screen flex items-center justify-center">
+        <div className="absolute top-0 left-0 flex items-center gap-2 p-4 pl-10 pt-6 z-50 ">
+          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <Heart className="size-4" />
+          </div>
+          <div className="flex flex-col gap-0.5 leading-none">
+            <span className="font-semibold">MedClinic</span>
+          </div>
+        </div>
         <div className="absolute inset-0 z-0">
           <Image
             src={blurHospital}
@@ -36,7 +45,8 @@ export default async function Home() {
               <p className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl px-8 text-sky-950	mt-4  ">
                 <b> Sign up </b>
                 <span className="text-slate-900 font-normal">
-                  now to reserve your appointment and access your health records.
+                  now to reserve your appointment and access your health
+                  records.
                 </span>
               </p>
             </div>

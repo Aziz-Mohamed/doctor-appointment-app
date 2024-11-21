@@ -17,7 +17,7 @@ export const AppointmentsProvider = ({ children, initialData }) => {
       status: "appointmentStatus",
     };
     const paramsObject = Object.fromEntries(searchParams.entries());
-    console.log("paramsObject", paramsObject);
+    // console.log("paramsObject", paramsObject);
     if (
       !paramsObject ||
       Object.keys(paramsObject).length === 0 
@@ -32,7 +32,7 @@ export const AppointmentsProvider = ({ children, initialData }) => {
     });
   }, [appointments, searchParams]);
 
-  console.log("filteredAppointments", filteredAppointments);
+  // console.log("filteredAppointments", filteredAppointments);
 
   return (
     <AppointmentsContext.Provider
@@ -55,7 +55,7 @@ export const useAppointments = () => {
       "useAppointments must be used within an AppointmentsProvider"
     );
   }
-  console.log("context", context);
+  // console.log("context", context);
   return context;
 };
 

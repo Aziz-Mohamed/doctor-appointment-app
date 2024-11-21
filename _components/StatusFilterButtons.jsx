@@ -46,7 +46,7 @@ export default function StatusFilter() {
 
   const handleClick = (status) => {
     const newStatus = activeStatus === status ? null : status
-    console.log('newStatus', newStatus)
+    // console.log('newStatus', newStatus)
     setActiveStatus(newStatus)
 
     if (newStatus) {

@@ -24,10 +24,18 @@ export const useQueryParams = (serverOrClient = "client") => {
         const params = new URLSearchParams(serverOrClient === "client" ? searchParams : window.location.search);
 
         Object.entries(queries).forEach(([key, value]) => {
-          value?.toString() && params.set(key, value);
+          if (value?.toString()) {
+            params.set(key, value);
+          } else {
+            params.delete(key);
+          }
         });
 
-        router.replace(`${serverOrClient === "client" ? pathname : window.location.pathname}?${params?.toString()}`, { shallow: true }, { scroll: false });
+        if (params.toString() === "") {
+            router.replace(`${serverOrClient === "client" ? pathname : window.location.pathname}`, { shallow: true }, { scroll: false });
+        } else {
+            router.replace(`${serverOrClient === "client" ? pathname : window.location.pathname}?${params?.toString()}`, { shallow: true }, { scroll: false });
+        }
     };
     
     return { setQueryParam, setMultiQueryParams };

@@ -26,6 +26,6 @@ export const useDoctors = () => {
   if (!context) {
     throw new Error("useDoctors must be used within an Doctor Provider");
   }
-  console.log("context", context);
+  // console.log("context", context);
   return context;
 };

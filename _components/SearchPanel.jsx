@@ -10,17 +10,16 @@ export default function SearchPanel() {
   const [specialtySearch, setSpecialtySearch] = useState("");
   const [doctorNameSearch, setDoctorNameSearch] = useState("");
 
-  const { setMultiQueryParams } = useQueryParams();
+  const { setMultiQueryParams, setQueryParam } = useQueryParams();
 
   const handleSpecialtyChange = (chosenSpecialty) => {
     setSpecialtySearch(chosenSpecialty);
   };
-  
+
   const handleDoctorNameChange = (event) => {
     setDoctorNameSearch(event.target.value);
+    // setQueryParam("doctorName", doctorNameSearch || "");
   };
-
-  console.log("specialtySearch from searchPanel", specialtySearch);
 
   return (
     <div className="container-md flex items-center gap-2 p-4 z-50 bg-slate-300/50 rounded-md shadow-lg">
@@ -38,8 +37,8 @@ export default function SearchPanel() {
           onClick={() => {
             setMultiQueryParams({
               doctorName: doctorNameSearch || "",
-              specialty: specialtySearch || ""
-            })
+              specialty: specialtySearch || "",
+            });
             // setQueryParam("doctorName", doctorNameSearch);
             // setQueryParam("specialty", specialtySearch);
           }}

@@ -53,18 +53,18 @@ export async function fetchMultiFilteredAppointmentsFromSupabase(filters) {
 
 
 export async function fetchFilteredDoctorsFromSupabase(filters = {}) {
-  // Start the query
   let query = supabase.from("doctors").select("*");
 
-  // Apply filters dynamically
   Object.entries(filters).forEach(([key, value]) => {
     if (value) {
-      query = query.eq(key, value);
+      query = query.ilike(key, `%${value.toLowerCase()}%`);
     }
   });
-
+  // console.log('thequery: ',query);
+  
   const { data: doctors, error } = await query;
-
+  // console.log('doctors: ',doctors);
+  
   if (error) {
     console.error(error);
     return null;

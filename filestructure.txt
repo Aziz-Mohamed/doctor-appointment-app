@@ -10,6 +10,7 @@
     |-- AppointmentsTable.jsx
     |-- Button.jsx
     |-- DateTimePicker.jsx
+    |-- DoctorList.jsx
     |-- DropDownMenu.jsx
     |-- DynamicLink.jsx
     |-- GoogleOAuth.jsx
@@ -25,6 +26,7 @@
     |-- SpinnerMini.jsx
     |-- StatusFilterButtons.jsx
     |-- ui
+        |-- Avatar.jsx
         |-- Button.jsx
         |-- Button2.jsx
         |-- Card.jsx
@@ -42,7 +44,9 @@
         |-- Skeleton.jsx
         |-- Sonner.jsx
         |-- Table.jsx
+        |-- Textarea.jsx
         |-- Tooltip.jsx
+        |-- calendar.jsx
 |-- _context
     |-- AppointmentsContext.js
     |-- DoctorsContext.js
@@ -70,6 +74,8 @@
         |-- callback
             |-- route.js
     |-- dashboard
+        |-- [doctorID]
+            |-- page.js
         |-- layout.js
         |-- page.js
     |-- error

@@ -20,6 +20,7 @@ import {
 } from "@/_components/ui/Popover";
 
 import { specialties } from "@/_lib/specialties";
+import { useQueryParams } from "@/_hooks/useQueryParams";
 
 // const specialties = [
 //   {
@@ -131,7 +132,7 @@ import { specialties } from "@/_lib/specialties";
 export default function DropDownMenu({handleSpecialtyChange}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-
+  const { setQueryParam } = useQueryParams();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -164,7 +165,7 @@ export default function DropDownMenu({handleSpecialtyChange}) {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                     handleSpecialtyChange(currentValue)
-                    // setQueryParam("specialty", currentValue);
+                    setQueryParam("specialty", currentValue);
                   }}
                 >
                   {specialty.label}
