@@ -7,7 +7,6 @@ export async function getUserData(serverOrClient = "server") {
   const supabase =
     serverOrClient === "server" ? ServerSupabase() : ClientSupabase();
   const { data, error } = await supabase.auth.getUser();
-  // console.log("getUserData", data);
 
   if (error || !data.user) return null;
   return { data, error };
@@ -19,11 +18,10 @@ export async function getAdminData(serverOrClient = "server") {
     serverOrClient === "server" ? ServerSupabase() : ClientSupabase();
 
   const { data, error } = await supabase.auth.getUser();
-  // console.log("getAdminData", data);
+
   if (error || !data?.user) return null;
 
   const userId = data.user.id;
-  // console.log("userId", userId);
 
   const { data: roleData, error: roleError } = await supabase
     .from("user")
@@ -31,8 +29,6 @@ export async function getAdminData(serverOrClient = "server") {
     .eq("id", userId)
     .single();
 
-  // console.log("roleData", roleData);
-  // console.log("roleError", roleError);
   if (roleError || roleData?.role !== "admin") return null;
   return { data, error, roleData, roleError };
 }

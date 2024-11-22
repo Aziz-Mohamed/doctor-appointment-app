@@ -52,7 +52,6 @@
     |-- AppointmentsContext.js
     |-- DoctorsContext.js
 |-- _hooks
-    |-- getUserData.js
     |-- useMobile.js
     |-- useQueryParams.js
 |-- _lib
@@ -60,6 +59,7 @@
     |-- data-server.js
     |-- fakeAppointmentsData.js
     |-- filtering.js
+    |-- getUserData.js
     |-- multiFiltering.js
     |-- sorting.js
     |-- specialties.js

@@ -50,7 +50,6 @@ export async function signUpNewUser(formData) {
     password: formData?.get("password"),
   });
 
-  // console.log("signUpNewUser", data)
   // await new Promise((resolve) => setTimeout(resolve, 2000)); // wait for 2 seconds
 
   if (error) {

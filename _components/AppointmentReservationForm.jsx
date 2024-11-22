@@ -29,26 +29,11 @@ import {
 import { Clock } from "lucide-react";
 import { createAppointment } from "@/_lib/actions";
 
-export default function AppointmentReservationForm({ doctor }) {
+export default function AppointmentReservationForm({ doctor ,user }) {
   const [date, setDate] = useState(null);
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   const formData = new FormData(event.target);
-
-  //   formData.append("doctorID", doctor.id);
-  //   formData.append("appointmentDate", date ? date.toISOString() : "");
-  //   formData.append("appointmentStatus", "pending");
-  //   formData.append("specialty", doctor.specialty);
-
-  //   for (const [key, value] of formData.entries()) {
-  //     console.log(`${key}: ${value}`);
-  //   }
-
-  //   await createAppointment(formData);
-  // };
-
+  console.log("user"  , user);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -74,7 +59,6 @@ export default function AppointmentReservationForm({ doctor }) {
 
   return (
         <form
-          // action={createAppointment}
           onSubmit={handleSubmit}
         >
     <Card>
@@ -90,6 +74,7 @@ export default function AppointmentReservationForm({ doctor }) {
               <Label htmlFor="patientName">Full Name</Label>
               <Input
                 id="patientName"
+                defaultValue={user?.user_metadata.full_name}
                 type="text"
                 name="patientName"
                 placeholder="John Doe"
@@ -100,6 +85,7 @@ export default function AppointmentReservationForm({ doctor }) {
               <Label htmlFor="patientEmail">Email</Label>
               <Input
                 id="patientEmail"
+                defaultValue={user?.email}
                 type="email"
                 name="patientEmail"
                 placeholder="john@example.com"
@@ -110,6 +96,7 @@ export default function AppointmentReservationForm({ doctor }) {
               <Label htmlFor="patientPhone">Phone Number</Label>
               <Input
                 id="patientPhone"
+                defaultValue={user?.phone? user.phone : ""}
                 type="tel"
                 name="patientPhone"
                 placeholder="(123) 456-7890"

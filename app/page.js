@@ -1,4 +1,4 @@
-import { getAdminData, getUserData } from "@/_hooks/getUserData";
+import { getAdminData, getUserData } from "@/_lib/getUserData";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button } from "@/_components/ui/Button";

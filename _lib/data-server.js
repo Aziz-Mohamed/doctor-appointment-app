@@ -15,7 +15,6 @@ export async function fetchAllAppointmentsFromSupabase() {
 }
 
 export async function fetchFilteredAppointmentsFromSupabase(filter) {
-  // filters is an object with column and value
   const supabase = createClient();
   let { data: appointments, error } = await supabase
     .from("appointments")
@@ -25,12 +24,11 @@ export async function fetchFilteredAppointmentsFromSupabase(filter) {
 }
 
 export async function fetchMultiFilteredAppointmentsFromSupabase(filters) {
-  // filters is array of objects with column and value
   const supabase = createClient();
   let { data: appointments, error } = await supabase
     .from("appointments")
     .select("*");
-  // Filters
+
   filters.map((filter) => {
     appointments.eq(filter.column, filter.value);
   });
@@ -60,10 +58,8 @@ export async function fetchMultiFilteredDoctorsFromSupabase(filters) {
       query = query.ilike(key, `%${value.toLowerCase()}%`);
     }
   });
-  // console.log('thequery: ',query);
 
   const { data: doctors, error } = await query;
-  // console.log('doctors from data-server: ',doctors);
 
   if (error) {
     console.error(error);
@@ -134,6 +130,8 @@ export async function insertAppointmentToSupabase(formData) {
 
   return data;
 }
+
+
 
 //UPDATE DATA
 export async function updateAppointmentToSupabase({
