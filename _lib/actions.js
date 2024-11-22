@@ -113,20 +113,28 @@ export async function signout() {
 }
 
 //CREATE
+// export async function createAppointment(formData) {
+//   const rawFormData = formData
+//     ? {
+//         userID: formData.get("userID"),
+//         doctorID: formData.get("doctorID"),
+//         appointmentDate: formData.get("appointmentDate"),
+//         appointmentTime: formData.get("appointmentTime"),
+//         appointmentStatus: formData.get("appointmentStatus"),
+//         specialty: formData.get("specialty"),
+//       }
+//     : formData;
+//   const appointments = await insertAppointmentToSupabase(rawFormData);
+//   return appointments;
+// }
+
 export async function createAppointment(formData) {
-  const rawFormData = formData
-    ? {
-        userID: formData.get("userID"),
-        doctorID: formData.get("doctorID"),
-        appointmentDate: formData.get("appointmentDate"),
-        appointmentTime: formData.get("appointmentTime"),
-        appointmentStatus: formData.get("appointmentStatus"),
-        specialty: formData.get("specialty"),
-      }
-    : formData;
-  const appointments = await insertAppointmentToSupabase(rawFormData);
+  const appointments = await insertAppointmentToSupabase(formData);
+  console.log(" created appointments", appointments);
   return appointments;
 }
+
+
 
 //UPDATE
 export async function updateAppointmentStatus(id, newStatus) {
