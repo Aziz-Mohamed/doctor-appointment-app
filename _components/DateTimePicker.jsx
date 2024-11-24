@@ -37,9 +37,6 @@ export default function DateTimePicker() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
-  // console.log(selectedDate);
-  // console.log(selectedTime);
-
   const startDate = startOfMonth(currentDate);
   const endDate = endOfMonth(currentDate);
   const days = eachDayOfInterval({ start: startDate, end: endDate });
@@ -73,10 +70,6 @@ export default function DateTimePicker() {
 
   const handleBookAppointment = () => {
     if (selectedDate && selectedTime) {
-      // alert(`Appointment booked for ${format(selectedDate, "MMMM d, yyyy")} at ${selectedTime}`)
-      // Here you would typically send this data to your backend
-      // console.log("selectedDate", selectedDate);
-      // console.log("selectedTime", selectedTime);
       const appointmentData = {
         appointmentDate: format(selectedDate, "MMMM d, yyyy"),
         appointmentTime: selectedTime,

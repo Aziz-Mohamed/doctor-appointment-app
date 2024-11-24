@@ -4,13 +4,15 @@ import { fetchMultiFilteredDoctorsFromSupabase } from "@/_lib/data-server";
 import { Suspense } from "react";
 import DoctorList from "@/_components/DoctorList";
 
+export const metadata = {
+  title: "Doctors | MedClinic",
+  description: "Search and book an appointment with a doctor",
+};
+
 async function page({ searchParams }) {
   const fetchedDoctorsList = await fetchMultiFilteredDoctorsFromSupabase(
     searchParams
   );
-
-  // console.log("searchParams", searchParams);
-  // console.log("fetchedDoctorsList", fetchedDoctorsList);
 
   return (
     <UserAccessProtectionServer>

@@ -4,16 +4,21 @@ import { AdminAccessProtectionServer } from "@/_components/RoleAccessProtection"
 import { AppointmentsProvider } from "@/_context/AppointmentsContext";
 import { fetchAllAppointmentsFromSupabase } from "@/_lib/data-server";
 
+export const metadata = {
+  title: "Admin | MedClinic",
+  description: "Manage appointments and bookings",
+};
+
 async function page({ params }) {
   const fetchedAppointments = await fetchAllAppointmentsFromSupabase();
 
   return (
-    <AppointmentsProvider initialData={fetchedAppointments}>
-      <AdminAccessProtectionServer>
+    <AdminAccessProtectionServer>
+      <AppointmentsProvider initialData={fetchedAppointments}>
         <AppointmentsTable params={params} />
         <InsertFakeBookingButton />
-      </AdminAccessProtectionServer>
-    </AppointmentsProvider>
+      </AppointmentsProvider>
+    </AdminAccessProtectionServer>
   );
 }
 

@@ -31,8 +31,6 @@ import { createAppointment } from "@/_lib/actions";
 
 export default function AppointmentReservationForm({ doctor ,user }) {
   const [date, setDate] = useState(null);
-
-  console.log("user"  , user);
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,8 +49,6 @@ export default function AppointmentReservationForm({ doctor ,user }) {
     Object.entries(additionalFields).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
-    console.log("Form Data Submitted:", Object.fromEntries(formData.entries()));
 
     await createAppointment(formData);
   };

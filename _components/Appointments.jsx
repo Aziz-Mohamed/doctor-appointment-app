@@ -7,15 +7,8 @@ import AppointmentsList from "@/_components/AppointmentsList";
 export function Appointments() {
   const [value, setValue] = useState([]);
 
-  // useEffect(() => {
-  //   console.log("type of Data", typeof value);
-  //   console.log("type of Data", Array.isArray(value));
-  //   console.log("value", value);
-  // }, [value]);
-
   const handleFetchData = async () => {
     const data = await getAppointments();
-    // console.log("Data", data);
     setValue(data);
   };
   return (

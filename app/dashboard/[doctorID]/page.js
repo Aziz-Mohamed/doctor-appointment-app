@@ -11,13 +11,23 @@ import { fetchFilteredDoctorsFromSupabase } from "@/_lib/data-server";
 import { getUserData } from "@/_lib/getUserData";
 import { Mail, MapPin, Phone, Star } from "lucide-react";
 
+
+export const generateMetadata = async ({ params } = {}) => {
+  const filter = { column: "doctorID", value: params.doctorID };
+  const [doctor] = await fetchFilteredDoctorsFromSupabase(filter);
+
+  return ({
+    title: `Dr. ${doctor.doctorName} | MedClinic`,
+    description: "Book an appointment with a doctor",
+  });
+}
+
+
 export default async function page({ params }) {
   const filter = { column: "doctorID", value: params.doctorID };
   const [doctor] = await fetchFilteredDoctorsFromSupabase(filter);
   const { data: {user} , error } = await getUserData();
 
-
-  
   //This mock-data is a placeholder as It wasn't feasible for me currently to generate all this fake data for 100 doctors
   const mockData = {
     bio: "Dr. Jane Smith is a board-certified cardiologist with over 15 years of experience. She specializes in preventive cardiology and heart health management.",

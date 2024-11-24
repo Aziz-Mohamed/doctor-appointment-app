@@ -63,15 +63,15 @@ export function LoginForm() {
               <Button type="submit" className="w-full">
                 Sign in
               </Button>
+            </div>
+          </form>
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full mt-4"
                 onClick={handleGoogleLogin}
               >
                 Sign in with Google
               </Button>
-            </div>
-          </form>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?
             <button
@@ -116,14 +116,14 @@ export function LoginForm() {
             <Button type="submit" className="w-full">
               Sign up
             </Button>
+          </form>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full mt-4"
               onClick={handleGoogleLogin}
             >
               Sign up with Google
             </Button>
-          </form>
           <div className="mt-4 text-center text-sm">
             Already have an account?
             <button

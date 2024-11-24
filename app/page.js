@@ -1,12 +1,14 @@
-import { getAdminData, getUserData } from "@/_lib/getUserData";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { Button } from "@/_components/ui/Button";
-import Image from "next/image";
-import blurHospital from "@/public/blur-hospital.jpg";
 import { LoginForm } from "@/_components/LoginForm";
+import { getAdminData, getUserData } from "@/_lib/getUserData";
+import blurHospital from "@/public/blur-hospital.jpg";
 import { Heart } from "lucide-react";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "MedClinic | Healthcare",
+  description: "MedClinic is a healthcare service that allows you to find a doctor and book an appointment.",
+};
 export default async function Home() {
   const { roleData: admin } = (await getAdminData()) ?? {};
   const { data: user } = (await getUserData()) ?? {};
@@ -57,26 +59,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-      // <div className="flex items-center justify-center h-screen w-screen bg-blue-100 bg-cover bg-center" style={{ backgroundImage: `url(/blur-hospital.jpg)` }}>
-      //   <Link href="/login">
-      //     <Button> Login | Signup </Button>
-      //   </Link>
-      // </div>
-
-      // <div className="flex items-center justify-center h-screen w-screen bg-blue-100">
-      //   <Image
-      //     src={blurHospital}
-      //     fill
-      //     placeholder="blur"
-      //     quality={80}
-      //     className="object-cover object-top"
-      //     alt="Hospital hall"
-      //   />
-      //   <Link href="/login">
-      //     <Button> Login | Signup</Button>
-      //   </Link>
-      // </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 "use server";
-import { fakeAppointmentsData } from "@/_lib/fakeAppointmentsData";
+
 import { createClient } from "@/utils/supabase/server";
 import {
   fetchAllAppointmentsFromSupabase,
@@ -14,7 +14,6 @@ import { headers } from "next/headers";
 //GET
 export async function getAppointments() {
   const appointments = await fetchAllAppointmentsFromSupabase();
-  // console.log("appointments", appointments);
   return appointments;
 }
 
@@ -50,8 +49,6 @@ export async function signUpNewUser(formData) {
     password: formData?.get("password"),
   });
 
-  // await new Promise((resolve) => setTimeout(resolve, 2000)); // wait for 2 seconds
-
   if (error) {
     console.error("Signup error:", error.message);
     redirect("/error");
@@ -68,7 +65,6 @@ export async function signInUser(formData) {
     password: formData?.get("password"),
   });
 
-  console.log("signInUser", data);
 
   if (error) {
     console.error("Login error:", error.message);
@@ -81,7 +77,7 @@ export async function signInUser(formData) {
 export async function signInWithGoogleOAuth() {
   const supabase = createClient();
   const origin = headers().get("origin");
-  // console.log("origin", origin);
+
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -112,306 +108,280 @@ export async function signout() {
 }
 
 //CREATE
-// export async function createAppointment(formData) {
-//   const rawFormData = formData
-//     ? {
-//         userID: formData.get("userID"),
-//         doctorID: formData.get("doctorID"),
-//         appointmentDate: formData.get("appointmentDate"),
-//         appointmentTime: formData.get("appointmentTime"),
-//         appointmentStatus: formData.get("appointmentStatus"),
-//         specialty: formData.get("specialty"),
-//       }
-//     : formData;
-//   const appointments = await insertAppointmentToSupabase(rawFormData);
-//   return appointments;
-// }
-
 export async function createAppointment(formData) {
   const appointments = await insertAppointmentToSupabase(formData);
-  console.log(" created appointments", appointments);
   return appointments;
 }
 
-
-
 //UPDATE
 export async function updateAppointmentStatus(id, newStatus) {
-  await updateAppointmentToSupabase({ id, appointmentStatus: newStatus });
+  const data = await updateAppointmentToSupabase({ id, appointmentStatus: newStatus });
   revalidatePath("/admin/specialties");
+  return data;
 }
 
+
+//INSERT FAKE DATA FOR DEVELOPMENT
 export async function insertFakeAppointments() {
+  const supabase = createClient();
   const fakeAppointments = [
-    // Family Medicine
     {
-      doctorID: 1,
-      appointmentDate: "2024-11-10",
-      appointmentTime: "09:00:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-01T08:00:00Z",
-      updatedAt: "2024-11-01T08:30:00Z",
-      userID: "f1c6b676-3e77-4a8f-9e90-23bce43c8211",
+      appointmentDate: "2024-11-29T22:00:00.000Z",
+      appointmentStatus: "pending",
+      doctorID: "24",
+      patientEmail: "abdilaziz.m.elsayed@gmail.com",
+      patientName: "Abdil Aziz Elsayed",
+      patientPhone: "01061044699",
+      reason: "Good things are coming ISA",
       specialty: "family-medicine",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 2,
-      appointmentDate: "2024-11-12",
-      appointmentTime: "11:30:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-01T09:00:00Z",
-      updatedAt: "2024-11-01T09:30:00Z",
-      userID: "a2d4b478-1e99-4b7a-8d4f-6e2f8b65a111",
+      appointmentDate: "2024-11-30T10:00:00.000Z",
+      appointmentStatus: "confirmed",
+      doctorID: "25",
+      patientEmail: "john.doe@example.com",
+      patientName: "John Doe",
+      patientPhone: "01234567890",
+      reason: "Check-up",
       specialty: "family-medicine",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 3,
-      appointmentDate: "2024-11-15",
-      appointmentTime: "15:00:00",
+      appointmentDate: "2024-12-01T14:00:00.000Z",
       appointmentStatus: "canceled",
-      createdAt: "2024-11-01T10:00:00Z",
-      updatedAt: "2024-11-01T10:30:00Z",
-      userID: "b3e4c688-2f21-4d2f-9e12-7f4b4c79b222",
+      doctorID: "26",
+      patientEmail: "jane.doe@example.com",
+      patientName: "Jane Doe",
+      patientPhone: "09876543210",
+      reason: "Not feeling well",
       specialty: "family-medicine",
+      timeOfDay: "afternoon"
     },
-    // Internal Medicine
     {
-      doctorID: 4,
-      appointmentDate: "2024-11-17",
-      appointmentTime: "10:00:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-02T08:00:00Z",
-      updatedAt: "2024-11-02T08:30:00Z",
-      userID: "c4f5d699-3g33-4d3f-8f34-8e5c5d87c333",
+      appointmentDate: "2024-12-02T16:00:00.000Z",
+      appointmentStatus: "completed",
+      doctorID: "27",
+      patientEmail: "bob.smith@example.com",
+      patientName: "Bob Smith",
+      patientPhone: "1112223333",
+      reason: "Follow-up",
+      specialty: "family-medicine",
+      timeOfDay: "afternoon"
+    },
+    {
+      appointmentDate: "2024-11-29T22:00:00.000Z",
+      appointmentStatus: "pending",
+      doctorID: "28",
+      patientEmail: "alice.johnson@example.com",
+      patientName: "Alice Johnson",
+      patientPhone: "4445556666",
+      reason: "New patient",
       specialty: "internal-medicine",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 5,
-      appointmentDate: "2024-11-20",
-      appointmentTime: "14:30:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-02T09:00:00Z",
-      updatedAt: "2024-11-02T09:30:00Z",
-      userID: "d5e6e711-4h44-4e4f-8g45-9f6d6e98d444",
+      appointmentDate: "2024-11-30T10:00:00.000Z",
+      appointmentStatus: "confirmed",
+      doctorID: "29",
+      patientEmail: "mike.davis@example.com",
+      patientName: "Mike Davis",
+      patientPhone: "5556667777",
+      reason: "Check-up",
       specialty: "internal-medicine",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 6,
-      appointmentDate: "2024-11-22",
-      appointmentTime: "16:00:00",
+      appointmentDate: "2024-12-01T14:00:00.000Z",
       appointmentStatus: "canceled",
-      createdAt: "2024-11-02T10:00:00Z",
-      updatedAt: "2024-11-02T10:30:00Z",
-      userID: "e6f7f822-5i55-5f5f-9h56-0a7f7f09e555",
+      doctorID: "30",
+      patientEmail: "emily.chen@example.com",
+      patientName: "Emily Chen",
+      patientPhone: "6667778888",
+      reason: "Not feeling well",
       specialty: "internal-medicine",
+      timeOfDay: "afternoon"
     },
-    // Pediatrics
     {
-      doctorID: 7,
-      appointmentDate: "2024-11-25",
-      appointmentTime: "09:30:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-03T08:00:00Z",
-      updatedAt: "2024-11-03T08:30:00Z",
-      userID: "f7g8g933-6j66-6g6g-0i67-1b8g8g20f666",
+      appointmentDate: "2024-12-02T16:00:00.000Z",
+      appointmentStatus: "completed",
+      doctorID: "31",
+      patientEmail: "david.lee@example.com",
+      patientName: "David Lee",
+      patientPhone: "7778889999",
+      reason: "Follow-up",
+      specialty: "internal-medicine",
+      timeOfDay: "afternoon"
+    },
+    {
+      appointmentDate: "2024-11-29T22:00:00.000Z",
+      appointmentStatus: "pending",
+      doctorID: "32",
+      patientEmail: "sarah.taylor@example.com",
+      patientName: "Sarah Taylor",
+      patientPhone: "8889990000",
+      reason: "New patient",
       specialty: "pediatrics",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 8,
-      appointmentDate: "2024-11-28",
-      appointmentTime: "13:00:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-03T09:00:00Z",
-      updatedAt: "2024-11-03T09:30:00Z",
-      userID: "g8h9h044-7k77-7h7h-1j78-2c9h9h31g777",
+      appointmentDate: "2024-11-30T10:00:00.000Z",
+      appointmentStatus: "confirmed",
+      doctorID: "33",
+      patientEmail: "kevin.white@example.com",
+      patientName: "Kevin White",
+      patientPhone: "9990001111",
+      reason: "Check-up",
       specialty: "pediatrics",
+      timeOfDay: "morning"
     },
     {
-      doctorID: 9,
-      appointmentDate: "2024-12-01",
-      appointmentTime: "15:30:00",
+      appointmentDate: "2024-11-30T10:00:00.000Z",
       appointmentStatus: "canceled",
-      createdAt: "2024-11-03T10:00:00Z",
-      updatedAt: "2024-11-03T10:30:00Z",
-      userID: "h9i0i155-8l88-8i8i-2k89-3d0i0i42h888",
+      doctorID: "2",
+      patientEmail: "jane.smith@example.com",
+      patientName: "Jane Smith",
+      patientPhone: "01020202020",
+      reason: "Routine check-up",
+      specialty: "family-medicine",
+      timeOfDay: "morning",
+    },
+    {
+      appointmentDate: "2024-12-01T14:00:00.000Z",
+      appointmentStatus: "confirmed",
+      doctorID: "3",
+      patientEmail: "adam.johnson@example.com",
+      patientName: "Adam Johnson",
+      patientPhone: "01030303030",
+      reason: "Family counseling",
+      specialty: "family-medicine",
+      timeOfDay: "afternoon",
+    },
+    {
+      appointmentDate: "2024-12-02T16:00:00.000Z",
+      appointmentStatus: "completed",
+      doctorID: "4",
+      patientEmail: "emily.brown@example.com",
+      patientName: "Emily Brown",
+      patientPhone: "01040404040",
+      reason: "Follow-up on tests",
+      specialty: "family-medicine",
+      timeOfDay: "evening",
+    },
+    {
+      appointmentDate: "2024-12-03T09:00:00.000Z",
+      appointmentStatus: "pending",
+      doctorID: "5",
+      patientEmail: "mark.taylor@example.com",
+      patientName: "Mark Taylor",
+      patientPhone: "01050505050",
+      reason: "Diabetes consultation",
+      specialty: "internal-medicine",
+      timeOfDay: "morning",
+    },
+    {
+      appointmentDate: "2024-12-04T11:00:00.000Z",
+      appointmentStatus: "canceled",
+      doctorID: "6",
+      patientEmail: "sarah.white@example.com",
+      patientName: "Sarah White",
+      patientPhone: "01060606060",
+      reason: "Hypertension follow-up",
+      specialty: "internal-medicine",
+      timeOfDay: "morning",
+    },
+    {
+      appointmentDate: "2024-12-05T15:00:00.000Z",
+      appointmentStatus: "confirmed",
+      doctorID: "7",
+      patientEmail: "michael.green@example.com",
+      patientName: "Michael Green",
+      patientPhone: "01070707070",
+      reason: "Liver function review",
+      specialty: "internal-medicine",
+      timeOfDay: "afternoon",
+    },
+    {
+      appointmentDate: "2024-12-06T17:00:00.000Z",
+      appointmentStatus: "completed",
+      doctorID: "8",
+      patientEmail: "chloe.adams@example.com",
+      patientName: "Chloe Adams",
+      patientPhone: "01080808080",
+      reason: "General health check",
+      specialty: "internal-medicine",
+      timeOfDay: "evening",
+    },
+    {
+      appointmentDate: "2024-12-07T08:00:00.000Z",
+      appointmentStatus: "pending",
+      doctorID: "9",
+      patientEmail: "kevin.martin@example.com",
+      patientName: "Kevin Martin",
+      patientPhone: "01090909090",
+      reason: "Growth assessment",
       specialty: "pediatrics",
-    },
-    // Cardiology
-    {
-      doctorID: 10,
-      appointmentDate: "2024-11-10",
-      appointmentTime: "10:00:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-01T08:00:00Z",
-      updatedAt: "2024-11-01T08:30:00Z",
-      userID: "aa1aa111-11aa-11a1-1a1a-1111aa1a1a1a",
-      specialty: "cardiology",
+      timeOfDay: "morning",
     },
     {
-      doctorID: 11,
-      appointmentDate: "2024-11-12",
-      appointmentTime: "12:00:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-01T08:00:00Z",
-      updatedAt: "2024-11-01T08:30:00Z",
-      userID: "bb2bb222-22bb-22b2-2b2b-2222bb2b2b2b",
-      specialty: "cardiology",
-    },
-    {
-      doctorID: 12,
-      appointmentDate: "2024-11-14",
-      appointmentTime: "14:00:00",
+      appointmentDate: "2024-12-08T10:00:00.000Z",
       appointmentStatus: "canceled",
-      createdAt: "2024-11-01T08:00:00Z",
-      updatedAt: "2024-11-01T08:30:00Z",
-      userID: "cc3cc333-33cc-33c3-3c3c-3333cc3c3c3c",
-      specialty: "cardiology",
+      doctorID: "10",
+      patientEmail: "olivia.jones@example.com",
+      patientName: "Olivia Jones",
+      patientPhone: "01101010101",
+      reason: "Flu symptoms",
+      specialty: "pediatrics",
+      timeOfDay: "morning",
     },
-    // Dermatology
     {
-      doctorID: 13,
-      appointmentDate: "2024-11-10",
-      appointmentTime: "09:30:00",
+      appointmentDate: "2024-12-09T14:00:00.000Z",
       appointmentStatus: "confirmed",
-      createdAt: "2024-11-02T08:00:00Z",
-      updatedAt: "2024-11-02T08:30:00Z",
-      userID: "dd4dd444-44dd-44d4-4d4d-4444dd4d4d4d",
-      specialty: "dermatology",
+      doctorID: "11",
+      patientEmail: "alex.anderson@example.com",
+      patientName: "Alex Anderson",
+      patientPhone: "01111111111",
+      reason: "Allergy follow-up",
+      specialty: "pediatrics",
+      timeOfDay: "afternoon",
     },
     {
-      doctorID: 14,
-      appointmentDate: "2024-11-12",
-      appointmentTime: "11:30:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-02T08:00:00Z",
-      updatedAt: "2024-11-02T08:30:00Z",
-      userID: "ee5ee555-55ee-55e5-5e5e-5555ee5e5e5e",
-      specialty: "dermatology",
+      appointmentDate: "2024-12-10T16:00:00.000Z",
+      appointmentStatus: "completed",
+      doctorID: "12",
+      patientEmail: "mia.wilson@example.com",
+      patientName: "Mia Wilson",
+      patientPhone: "01121212121",
+      reason: "Vaccination schedule",
+      specialty: "pediatrics",
+      timeOfDay: "evening",
     },
-    {
-      doctorID: 15,
-      appointmentDate: "2024-11-14",
-      appointmentTime: "13:30:00",
-      appointmentStatus: "canceled",
-      createdAt: "2024-11-02T08:00:00Z",
-      updatedAt: "2024-11-02T08:30:00Z",
-      userID: "ff6ff666-66ff-66f6-6f6f-6666ff6f6f6f",
-      specialty: "dermatology",
-    },
-    // Endocrinology
-    {
-      doctorID: 16,
-      appointmentDate: "2024-11-11",
-      appointmentTime: "10:00:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-03T08:00:00Z",
-      updatedAt: "2024-11-03T08:30:00Z",
-      userID: "gg7gg777-77gg-77g7-7g7g-7777gg7g7g7g",
-      specialty: "endocrinology",
-    },
-    {
-      doctorID: 17,
-      appointmentDate: "2024-11-13",
-      appointmentTime: "12:30:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-03T08:00:00Z",
-      updatedAt: "2024-11-03T08:30:00Z",
-      userID: "hh8hh888-88hh-88h8-8h8h-8888hh8h8h8h",
-      specialty: "endocrinology",
-    },
-    {
-      doctorID: 18,
-      appointmentDate: "2024-11-15",
-      appointmentTime: "15:00:00",
-      appointmentStatus: "canceled",
-      createdAt: "2024-11-03T08:00:00Z",
-      updatedAt: "2024-11-03T08:30:00Z",
-      userID: "ii9ii999-99ii-99i9-9i9i-9999ii9i9i9i",
-      specialty: "endocrinology",
-    },
-    // Gastroenterology
-    {
-      doctorID: 19,
-      appointmentDate: "2024-11-10",
-      appointmentTime: "08:30:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-04T08:00:00Z",
-      updatedAt: "2024-11-04T08:30:00Z",
-      userID: "jj1jj111-11jj-11j1-1j1j-1111jj1j1j1j",
-      specialty: "gastroenterology",
-    },
-    {
-      doctorID: 20,
-      appointmentDate: "2024-11-13",
-      appointmentTime: "11:00:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-04T08:00:00Z",
-      updatedAt: "2024-11-04T08:30:00Z",
-      userID: "kk2kk222-22kk-22k2-2k2k-2222kk2k2k2k",
-      specialty: "gastroenterology",
-    },
-    {
-      doctorID: 21,
-      appointmentDate: "2024-11-15",
-      appointmentTime: "13:00:00",
-      appointmentStatus: "canceled",
-      createdAt: "2024-11-04T08:00:00Z",
-      updatedAt: "2024-11-04T08:30:00Z",
-      userID: "ll3ll333-33ll-33l3-3l3l-3333ll3l3l3l",
-      specialty: "gastroenterology",
-    },
-    // Neurology
-    {
-      doctorID: 22,
-      appointmentDate: "2024-11-10",
-      appointmentTime: "09:00:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-05T08:00:00Z",
-      updatedAt: "2024-11-05T08:30:00Z",
-      userID: "mm4mm444-44mm-44m4-4m4m-4444mm4m4m4m",
-      specialty: "neurology",
-    },
-    {
-      doctorID: 23,
-      appointmentDate: "2024-11-12",
-      appointmentTime: "10:30:00",
-      appointmentStatus: "pending",
-      createdAt: "2024-11-05T08:00:00Z",
-      updatedAt: "2024-11-05T08:30:00Z",
-      userID: "nn5nn555-55nn-55n5-5n5n-5555nn5n5n5n",
-      specialty: "neurology",
-    },
-    {
-      doctorID: 24,
-      appointmentDate: "2024-11-15",
-      appointmentTime: "14:30:00",
-      appointmentStatus: "canceled",
-      createdAt: "2024-11-05T08:00:00Z",
-      updatedAt: "2024-11-05T08:30:00Z",
-      userID: "oo6oo666-66oo-66o6-6o6o-6666oo6o6o6o",
-      specialty: "neurology",
-    },
-    // Oncology
-    {
-      doctorID: 25,
-      appointmentDate: "2024-11-11",
-      appointmentTime: "13:30:00",
-      appointmentStatus: "confirmed",
-      createdAt: "2024-11-06T08:00:00Z",
-      updatedAt: "2024-11-06T08:30:00Z",
-      userID: "pp7pp777-77pp-77p7-7p7p-7777pp7p7p7p",
-      specialty: "oncology",
-    },
-  ];
+  ]
+
 
   for (const appointment of fakeAppointments) {
-    await insertAppointmentToSupabase({
-      userID: appointment.userID,
-      doctorID: appointment.doctorID,
+    const appointmentData = {
+      doctorID: Number(appointment.doctorID) || 1,
       appointmentDate: appointment.appointmentDate,
-      appointmentTime: appointment.appointmentTime,
-      appointmentStatus: appointment.appointmentStatus,
+      appointmentStatus: String(appointment.appointmentStatus),
+      createdAt: new Date(),
+      updatedAt: new Date(),
       specialty: appointment.specialty,
-    });
+      timeOfDay: appointment.timeOfDay,
+      patientName: appointment.patientName,
+      patientEmail: appointment.patientEmail,
+      patientPhone: String(appointment.patientPhone),
+      reason: appointment.reason,
+    };
+    const { data, error } = await supabase
+      .from("appointments")
+      .insert([appointmentData])
+      .select();
+
+    if (error) {
+      console.error(error);
+      return null;
+    }
+    return data;
   }
 }

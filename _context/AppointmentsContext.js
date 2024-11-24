@@ -10,29 +10,27 @@ export const AppointmentsContext = createContext({
 export const AppointmentsProvider = ({ children, initialData }) => {
   const [appointments, setAppointments] = useState(initialData || []);
   const searchParams = useSearchParams();
-
   
   const filteredAppointments = useMemo(() => {
     const keyMapping = {
       status: "appointmentStatus",
     };
     const paramsObject = Object.fromEntries(searchParams.entries());
-    // console.log("paramsObject", paramsObject);
     if (
       !paramsObject ||
       Object.keys(paramsObject).length === 0 
     ) {
-      return appointments;
+      return [...appointments].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
-    return appointments.filter((appointment) => {
-      return Object.keys(paramsObject).every((key) => {
-        const mappedKey = keyMapping[key] || key;
-        return appointment[mappedKey] === paramsObject[key];
-      });
-    });
+    return [...appointments]
+      .filter((appointment) => {
+        return Object.keys(paramsObject).every((key) => {
+          const mappedKey = keyMapping[key] || key;
+          return appointment[mappedKey] === paramsObject[key];
+        });
+      })
+      .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [appointments, searchParams]);
-
-  // console.log("filteredAppointments", filteredAppointments);
 
   return (
     <AppointmentsContext.Provider
@@ -55,76 +53,5 @@ export const useAppointments = () => {
       "useAppointments must be used within an AppointmentsProvider"
     );
   }
-  // console.log("context", context);
   return context;
 };
-
-// const [searchInput, setSearchInput] = useState('');
-
-// const filteredAppointments = useMemo(() => {
-//   if (!searchInput) {
-//     return appointments;
-//   }
-
-//   return appointments.filter((appointment) => {
-//     return Object.values(appointment).some((value) => {
-//       return String(value).toLowerCase().includes(searchInput.toLowerCase());
-//     });
-//   });
-// }, [appointments, searchInput]);
-
-
-
-
-
-
-
-
-
-
-
-// const allParamsExceptFilter = Object.fromEntries(
-//   [...searchParams.entries()].filter(([key]) => key !== "filter")
-// );
-// const filterParams = Object.fromEntries(
-//   [...searchParams.entries()].filter(([key]) => key === "filter")
-// );
-
-// console.log("allParamsExceptFilter", allParamsExceptFilter);
-// console.log("filterParams", filterParams);
-
-// const keyMapping = {
-//   status: "appointmentStatus",
-// };
-
-// const filteredAppointments = useMemo(() => {
-//   console.log("allParamsExceptFilter", allParamsExceptFilter);
-
-//   if (
-//     !allParamsExceptFilter ||
-//     Object.keys(allParamsExceptFilter).length === 0 ||
-//     allParamsExceptFilter.specialty === "all-specialties"
-//   ) {
-//     return appointments;
-//   }
-
-//   if (filterParams) {
-//     const filterValue = Object.values(filterParams)[0].trim().toLowerCase();
-//     return appointments.filter((appointment) => {
-//       return Object.values(appointment).some((value) => {
-//         const aValue = String(value).trim().toLowerCase();
-//         return aValue.includes(filterValue) || filterValue.includes(aValue);
-//       });
-//     });
-//   }
-
-//   if (allParamsExceptFilter) {
-//     return appointments.filter((appointment) => {
-//       return Object.keys(allParamsExceptFilter).every((key) => {
-//         const mappedKey = keyMapping[key] || key;
-//         return appointment[mappedKey] === allParamsExceptFilter[key];
-//       });
-//     });
-//   }
-
-// }, [appointments, allParamsExceptFilter, filterParams]);

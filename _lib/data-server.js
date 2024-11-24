@@ -1,11 +1,14 @@
+import { createClient } from "@/utils/supabase/server";
 import supabase from "./supabase";
 
 // FETCH DATA
 export async function fetchAllAppointmentsFromSupabase() {
+  const supabase = createClient();
   const { data: appointments, error } = await supabase
     .from("appointments")
-    .select("*");
-  // console.log("appointments", appointments)
+    .select("id,appointmentStatus, doctorID, patientName, patientPhone, specialty, timeOfDay, appointmentDate, patientEmail, reason, createdAt, updatedAt");
+    // .select("*");
+
   if (error) {
     console.error(error);
     return null;
@@ -69,39 +72,8 @@ export async function fetchMultiFilteredDoctorsFromSupabase(filters) {
   return doctors;
 }
 
+
 // INSERT DATA
-// export async function insertAppointmentToSupabase({
-//   userID,
-//   doctorID,
-//   appointmentDate,
-//   appointmentTime,
-//   appointmentStatus,
-//   specialty,
-// }) {
-//   const { data, error } = await supabase
-//     .from("appointments")
-//     .insert([
-//       {
-//         userID: Number(userID),
-//         doctorID: Number(doctorID),
-//         appointmentDate: appointmentDate,
-//         appointmentTime: appointmentTime,
-//         appointmentStatus: String(appointmentStatus),
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//         specialty: specialty,
-//       },
-//     ])
-//     .select();
-//   // console.log(data)
-//   if (error) {
-//     console.error(error);
-//     return null;
-//   }
-
-//   return data;
-// }
-
 export async function insertAppointmentToSupabase(formData) {
   const appointmentData = {
     doctorID: Number(formData.get("doctorID")),
@@ -134,31 +106,47 @@ export async function insertAppointmentToSupabase(formData) {
 
 
 //UPDATE DATA
-export async function updateAppointmentToSupabase({
-  id,
-  userID,
-  doctorID,
-  appointmentDate,
-  appointmentTime,
-  appointmentStatus,
-  specialty,
-}) {
+export async function updateAppointmentToSupabase(filter) {
+
   const { data, error } = await supabase
     .from("appointments")
-    .update({
-      userID: Number(userID),
-      doctorID: Number(doctorID),
-      appointmentDate: appointmentDate,
-      appointmentTime: appointmentTime,
-      appointmentStatus: String(appointmentStatus),
-      updatedAt: new Date(),
-      specialty: specialty,
-    })
-    .eq("id", id)
+    .update({ appointmentStatus: filter.appointmentStatus, updatedAt: new Date() })
+    .eq("id", filter.id)
     .select();
-  // console.log(data)
+    
   if (error) {
     console.error(error);
     return null;
   }
+  return data
 }
+
+
+// export async function updateAppointmentToSupabase({
+//   id,
+//   userID,
+//   doctorID,
+//   appointmentDate,
+//   appointmentTime,
+//   appointmentStatus,
+//   specialty,
+// }) {
+//   const { data, error } = await supabase
+//     .from("appointments")
+//     .update({
+//       userID: Number(userID),
+//       doctorID: Number(doctorID),
+//       appointmentDate: appointmentDate,
+//       appointmentTime: appointmentTime,
+//       appointmentStatus: String(appointmentStatus),
+//       updatedAt: new Date(),
+//       specialty: specialty,
+//     })
+//     .eq("id", id)
+//     .select();
+
+//   if (error) {
+//     console.error(error);
+//     return null;
+//   }
+// }

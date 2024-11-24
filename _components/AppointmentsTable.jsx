@@ -28,6 +28,8 @@ import { updateAppointmentStatus } from "@/_lib/actions";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import StatusFilterButtons from "@/_components/StatusFilterButtons";
+import { CircleCheckBig } from 'lucide-react';
+
 
 const TruncatedCell = ({ content }) => (
   <TooltipProvider>
@@ -46,24 +48,21 @@ export default function AppointmentsTable() {
   const [sort, setSort] = useState("");
   const { filteredAppointments, setAppointments } = useAppointments();
 
-  const handleStatusChange = useCallback(
-    (id, newStatus) => {
-      const data = updateAppointmentStatus(id, newStatus);
-      if (!data) {
-        alert("There was a problem. Please try again later.");
-        return;
-      }
-      setAppointments((prevData) =>
-        prevData.map((appointment) =>
-          appointment.id === id
-            ? { ...appointment, appointmentStatus: newStatus }
-            : appointment
-        )
-      );
-      toast("Status has been updated Successfully.");
-    },
-    [setAppointments]
-  );
+  const handleStatusChange = async (id, newStatus) => {
+    const  data = await updateAppointmentStatus(id, newStatus);
+    if (!data) {
+      alert("There was a problem. Please try again later.");
+      return;
+    }
+    setAppointments((prevData) =>
+      prevData.map((appointment) =>
+        appointment.id === id
+          ? { ...appointment, appointmentStatus: newStatus }
+          : appointment
+      )
+    );
+    toast(<> <CircleCheckBig /> Status has been updated Successfully.</>);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -90,35 +89,40 @@ export default function AppointmentsTable() {
           <TableCaption>A list of appointments.</TableCaption>
           <TableHeader>
             <TableRow className="bg-gray-100">
-              <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">
-                ID
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Patient Name
               </TableHead>
-              <TableHead className="w-[8.33%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                specialty
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
                 Doctor ID
               </TableHead>
-              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
                 Date
               </TableHead>
-              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
                 Time
               </TableHead>
-              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
                 Status
               </TableHead>
-              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
-                User ID
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500 truncate overflow-hidden whitespace-nowrap">
+                Patient Email
               </TableHead>
-              <TableHead className="w-[16.66%] py-3 px-4 text-left text-sm font-medium text-gray-500">
-                Specialty
+              <TableHead className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Phone 
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredAppointments.map((appointment) => (
-              <TableRow key={appointment.id} className="border-b">
+              <TableRow key={appointment.id} className="border-b gap-x-2">
                 <TableCell className="py-3 px-4 text-sm">
-                  {" "}
-                  <TruncatedCell content={appointment.id} />{" "}
+                  <TruncatedCell content={appointment.patientName.replace(/\b\w/g, char => char.toUpperCase())} />
+                </TableCell>
+                <TableCell className="py-3 px-4 text-sm">
+                  {appointment.specialty.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}
                 </TableCell>
                 <TableCell className="py-3 px-4 text-sm">
                   {appointment.doctorID}
@@ -127,7 +131,7 @@ export default function AppointmentsTable() {
                   {appointment.appointmentDate}
                 </TableCell>
                 <TableCell className="py-3 px-4 text-sm">
-                  {appointment.appointmentTime}
+                  {appointment.timeOfDay.replace(/\b\w/g, char => char.toUpperCase())}
                 </TableCell>
                 <TableCell className="py-3 px-4 text-sm">
                   <Select
@@ -152,59 +156,16 @@ export default function AppointmentsTable() {
                   </Select>
                 </TableCell>
                 <TableCell className="py-3 px-4 text-sm">
-                  {appointment.userID}
+                <TruncatedCell content={appointment.patientEmail} />
                 </TableCell>
                 <TableCell className="py-3 px-4 text-sm">
-                  {appointment.specialty}
+                  {appointment.patientPhone}
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-
-      {/* // The same table but with divs instead of Table component */}
-      {/* <div className="w-full overflow-x-auto">
-      <div className="min-w-full">
-        <div className="grid grid-cols-12 gap-4 py-3 px-4 text-sm font-medium text-gray-500 bg-gray-100">
-          <div className="col-span-1">ID</div>
-          <div className="col-span-1">Doctor ID</div>
-          <div className="col-span-2">Date</div>
-          <div className="col-span-2">Time</div>
-          <div className="col-span-2">Status</div>
-          <div className="col-span-2">User ID</div>
-          <div className="col-span-2">Specialty</div>
-        </div>
-        <div className="bg-white">
-          {appointmentData.map((appointment) => (
-            <div key={appointment.id} className="grid grid-cols-12 gap-4 py-3 px-4 border-b text-sm">
-              <div className="col-span-1 font-medium"> <TruncatedCell content={appointment.id} /></div>
-              <div className="col-span-1">{appointment.doctorID}</div>
-              <div className="col-span-2">{appointment.appointmentDate}</div>
-              <div className="col-span-2">{appointment.appointmentTime}</div>
-              <div className="col-span-2">
-                <Select
-                  onValueChange={(value) => handleStatusChange(appointment.id, value)}
-                  defaultValue={appointment.appointmentStatus}
-                >
-                  <SelectTrigger className={`w-full ${getStatusColor(appointment.appointmentStatus)}`}>
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="confirmed">Confirmed</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="canceled">Canceled</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="col-span-2">{appointment.userID}</div>
-              <div className="col-span-2">{appointment.specialty}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div> */}
     </>
   );
 }

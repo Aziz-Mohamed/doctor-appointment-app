@@ -88,8 +88,6 @@
     |-- globals.css
     |-- layout.js
     |-- loading.js
-    |-- login
-        |-- page.js
     |-- not-found.js
     |-- page.js
     |-- private
