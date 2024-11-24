@@ -9,6 +9,7 @@ export const metadata = {
   title: "MedClinic | Healthcare",
   description: "MedClinic is a healthcare service that allows you to find a doctor and book an appointment.",
 };
+
 export default async function Home() {
   const { roleData: admin } = (await getAdminData()) ?? {};
   const { data: user } = (await getUserData()) ?? {};

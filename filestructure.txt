@@ -81,6 +81,7 @@
     |-- error
         |-- page.js
     |-- error.js
+    |-- favicon.ico
     |-- fonts
         |-- GeistMonoVF.woff
         |-- GeistVF.woff
