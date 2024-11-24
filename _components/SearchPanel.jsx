@@ -18,7 +18,6 @@ export default function SearchPanel() {
 
   const handleDoctorNameChange = (event) => {
     setDoctorNameSearch(event.target.value);
-    // setQueryParam("doctorName", doctorNameSearch || "");
   };
 
   return (
@@ -39,8 +38,6 @@ export default function SearchPanel() {
               doctorName: doctorNameSearch || "",
               specialty: specialtySearch || "",
             });
-            // setQueryParam("doctorName", doctorNameSearch);
-            // setQueryParam("specialty", specialtySearch);
           }}
         >
           Search

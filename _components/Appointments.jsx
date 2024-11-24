@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getAppointments } from "../_lib/actions";
 import AppointmentsList from "@/_components/AppointmentsList";
+import { useState } from "react";
+import { getAppointments } from "../_lib/actions";
 
 export function Appointments() {
   const [value, setValue] = useState([]);

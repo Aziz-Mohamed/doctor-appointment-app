@@ -17,11 +17,9 @@
     |-- GoogleOAuth.jsx
     |-- InsertFakeBookingButton.jsx
     |-- LoginForm.jsx
-    |-- ManualInput.jsx
     |-- RoleAccessProtection.jsx
     |-- SearchPanel.jsx
     |-- Signout.jsx
-    |-- Signup.jsx
     |-- SlideShowBG.jsx
     |-- Spinner.jsx
     |-- SpinnerMini.jsx
@@ -89,9 +87,6 @@
     |-- globals.css
     |-- layout.js
     |-- loading.js
-    |-- login
-        |-- actions.js
-        |-- page.js
     |-- not-found.js
     |-- page.js
     |-- private
