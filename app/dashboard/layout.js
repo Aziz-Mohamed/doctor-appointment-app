@@ -3,7 +3,7 @@ import SearchPanel from "@/_components/SearchPanel";
 import Signout from "@/_components/Signout";
 import SlideShowBG from "@/_components/SlideShowBG";
 import { Avatar, AvatarFallback, AvatarImage } from "@/_components/ui/Avatar";
-import { Button } from "@/_components/ui/Button";
+import { Button } from "@/_components/ui/Buttonx";
 import { getAdminData, getUserData } from "@/_lib/getUserData";
 import { Heart, User } from "lucide-react";
 import Link from "next/link";
