@@ -3,7 +3,7 @@ import * as React from "react"
 import { DayPicker } from "react-day-picker"
 
 import { cn } from "@/_lib/utils.js"
-import { buttonVariants } from "@/_components/ui/button"
+import { buttonVariants } from "@/_components/ui/Button"
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons"
 
 function Calendar({
