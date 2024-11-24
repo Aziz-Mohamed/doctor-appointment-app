@@ -1,4 +1,4 @@
-// "use client"
+
 import React from 'react'
 import {insertFakeAppointments} from "@/_lib/actions";
 import { Button } from "@/_components/ui/Button";

@@ -35,21 +35,3 @@ function sortAppointments(appointments, aspect, order) {
 
 
 
-
-// function sortAppointments(appointments, aspect, order = "asc") {
-//   if (order === "asc") {
-//     return appointments.sort((a, b) => {
-//       if (a[aspect] < b[aspect]) return -1;
-//       if (a[aspect] > b[aspect]) return 1;
-//       return 0;
-//     });
-//   } else if (order === "desc") {
-//     return appointments.sort((a, b) => {
-//       if (a[aspect] < b[aspect]) return 1;
-//       if (a[aspect] > b[aspect]) return -1;
-//       return 0;
-//     });
-//   } else {
-//     throw new Error(`something went wrong. You have used ${order}. let's try later`);
-//   }
-// }

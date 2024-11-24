@@ -120,33 +120,3 @@ export async function updateAppointmentToSupabase(filter) {
   }
   return data
 }
-
-
-// export async function updateAppointmentToSupabase({
-//   id,
-//   userID,
-//   doctorID,
-//   appointmentDate,
-//   appointmentTime,
-//   appointmentStatus,
-//   specialty,
-// }) {
-//   const { data, error } = await supabase
-//     .from("appointments")
-//     .update({
-//       userID: Number(userID),
-//       doctorID: Number(doctorID),
-//       appointmentDate: appointmentDate,
-//       appointmentTime: appointmentTime,
-//       appointmentStatus: String(appointmentStatus),
-//       updatedAt: new Date(),
-//       specialty: specialty,
-//     })
-//     .eq("id", id)
-//     .select();
-
-//   if (error) {
-//     console.error(error);
-//     return null;
-//   }
-// }

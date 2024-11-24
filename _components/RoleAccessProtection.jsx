@@ -20,7 +20,6 @@ export function createRoleProtection(dataRetrievalFn) {
           </Link>
         </div>
       );
-      // redirect('/login')
     }
 
     return <>{children}</>;

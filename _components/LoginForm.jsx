@@ -22,10 +22,6 @@ export function LoginForm() {
     await signInWithGoogleOAuth();
   };
 
-  // const handleSignUp = async () => {
-  //   await signUpNewUser();
-  // }
-
   if (signUpOrSignIn === "SignIn") {
     return (
       <Card className="mx-auto w-[23rem]">

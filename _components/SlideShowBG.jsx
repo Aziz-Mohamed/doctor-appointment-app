@@ -9,18 +9,6 @@ import { useState, useEffect } from "react";
 
 const images = [dentistChair, doctor, hospitalBuilding, hospitalHall];
 
-// export default function SlideShowBG() {
-//   return (
-//     <div className="w-screen max-h-[60vh] overflow-hidden rounded-b-3xl shadow-2xl shadow-blue-950/50 bg-gradient-to-b from-transparent to-transparent flex justify-end">
-//       {images.map((image, index) => (
-//         <div key={index} className="mb-0">
-//           <Image src={image} alt={`Image ${index + 1}`} />
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
 export default function SlideShowBG() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
