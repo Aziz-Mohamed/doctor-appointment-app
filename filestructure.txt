@@ -95,7 +95,6 @@
 |-- components.json
 |-- jsconfig.json
 |-- next.config.mjs
-|-- package-lock.json
 |-- package.json
 |-- pnpm-lock.yaml
 |-- postcss.config.mjs
