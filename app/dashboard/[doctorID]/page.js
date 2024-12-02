@@ -23,7 +23,8 @@ export const generateMetadata = async ({ params } = {}) => {
 }
 
 
-export default async function page({ params }) {
+export default async function page(props) {
+  const params = await props.params;
   const filter = { column: "doctorID", value: params.doctorID };
   const [doctor] = await fetchFilteredDoctorsFromSupabase(filter);
   const { data: {user} , error } = await getUserData();

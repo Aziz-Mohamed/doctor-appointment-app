@@ -9,7 +9,8 @@ export const metadata = {
   description: "Search and book an appointment with a doctor",
 };
 
-async function page({ searchParams }) {
+async function page(props) {
+  const searchParams = await props.searchParams;
   const fetchedDoctorsList = await fetchMultiFilteredDoctorsFromSupabase(
     searchParams
   );
