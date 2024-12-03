@@ -18,7 +18,7 @@ import {
 } from "@/_components/ui/Popover";
 import { Calendar } from "@/_components/ui/Calendar";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -28,14 +28,18 @@ import {
 } from "@/_components/ui/Select";
 import { Clock } from "lucide-react";
 import { createAppointment } from "@/_lib/actions";
+import { FaCheckCircle } from "react-icons/fa";
+import { toast } from "sonner";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 
-export default function AppointmentReservationForm({ doctor ,user }) {
+export default function AppointmentReservationForm({ doctor, user }) {
   const [date, setDate] = useState(null);
-  
-  
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
 
     const formData = new FormData(event.target);
 
@@ -46,26 +50,31 @@ export default function AppointmentReservationForm({ doctor ,user }) {
       specialty: doctor.specialty,
     };
 
-
     Object.entries(additionalFields).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    await createAppointment(formData);
+    startTransition(async () => await createAppointment(formData));
+    toast(
+      <>
+        {" "}
+        <FaCheckCircle color="green" size={20} /> Appointment has been reserved
+        Successfully.
+      </>
+    );
+    router.push("/dashboard");
   };
 
   return (
-        <form
-          onSubmit={handleSubmit}
-        >
-    <Card>
-      <CardHeader>
-        <CardTitle>Reserve Appointment</CardTitle>
-        <CardDescription>
-          Fill out the form to book your appointment
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <form onSubmit={handleSubmit}>
+      <Card>
+        <CardHeader>
+          <CardTitle>Reserve Appointment</CardTitle>
+          <CardDescription>
+            Fill out the form to book your appointment
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="patientName">Full Name</Label>
@@ -93,7 +102,7 @@ export default function AppointmentReservationForm({ doctor ,user }) {
               <Label htmlFor="patientPhone">Phone Number</Label>
               <Input
                 id="patientPhone"
-                defaultValue={user?.phone? user.phone : ""}
+                defaultValue={user?.phone ? user.phone : ""}
                 type="tel"
                 name="patientPhone"
                 placeholder="(123) 456-7890"
@@ -149,13 +158,13 @@ export default function AppointmentReservationForm({ doctor ,user }) {
               />
             </div>
           </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full" type="submit">
-          <Clock className="mr-2 h-4 w-4" /> Book Appointment
-        </Button>
-      </CardFooter>
-    </Card>
-        </form>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full" type="submit" disabled={isPending}>
+            <Clock className="mr-2 h-4 w-4" /> Book Appointment
+          </Button>
+        </CardFooter>
+      </Card>
+    </form>
   );
 }

@@ -62,7 +62,7 @@ export default function AppointmentsTable() {
           : appointment
       )
     );
-    toast(<> <FaCheckCircle /> Status has been updated Successfully.</>);
+    toast(<> <FaCheckCircle color="green" size={20}  /> Status has been updated Successfully.</>);
   };
 
   const getStatusColor = (status) => {
