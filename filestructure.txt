@@ -1,6 +1,9 @@
 |-- .env.local
 |-- .eslintrc.json
 |-- .gitignore
+|-- .yarn
+    |-- install-state.gz
+|-- .yarnrc.yml
 |-- README.md
 |-- _components
     |-- AppSidebar.jsx

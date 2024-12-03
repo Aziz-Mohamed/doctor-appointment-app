@@ -1,9 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export function createClient() {
-  const cookieStore = /* @next-codemod-error Manually await this call and refactor the function to be async */
-  cookies();
+export  function createClient() {
+  const cookieStore =  cookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,

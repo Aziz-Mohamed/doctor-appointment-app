@@ -6,7 +6,8 @@ import { createClient as ClientSupabase } from "@/utils/supabase/client";
 export async function getUserData(serverOrClient = "server") {
   const supabase =
     serverOrClient === "server" ? ServerSupabase() : ClientSupabase();
-  const { data, error } = await supabase.auth.getUser();
+
+  const { data, error } = await supabase?.auth?.getUser();
 
   if (error || !data.user) return null;
   return { data, error };

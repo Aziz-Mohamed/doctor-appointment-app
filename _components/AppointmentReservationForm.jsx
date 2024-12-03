@@ -32,6 +32,7 @@ import { createAppointment } from "@/_lib/actions";
 export default function AppointmentReservationForm({ doctor ,user }) {
   const [date, setDate] = useState(null);
   
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
