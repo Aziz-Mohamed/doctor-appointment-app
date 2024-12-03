@@ -16,7 +16,7 @@ export default async function Layout({ children }) {
   return (
     <UserAccessProtectionServer>
       <div className="h-screen ">
-        <div className="relative flex min-h-[60vh] overflow-hidden mb-16">
+        <div className="relative flex min-h-[60vh]  mb-16">
           <div className="flex flex-col">
             <section className="z-50 flex flex-row justify-between items-center">
               <Link href="/">
