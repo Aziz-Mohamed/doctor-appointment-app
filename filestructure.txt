@@ -1,9 +1,14 @@
 |-- .env.local
 |-- .eslintrc.json
 |-- .gitignore
+|-- .pnp.cjs
+|-- .pnp.loader.mjs
 |-- .yarn
     |-- install-state.gz
-|-- .yarnrc.yml
+    |-- unplugged
+        |-- @next-swc-darwin-arm64-npm-14.2.15-015d59327c
+        |-- fsevents-patch-6b67494872
+        |-- node-gyp-npm-10.3.1-08d55ad11a
 |-- README.md
 |-- _components
     |-- AppSidebar.jsx
@@ -98,6 +103,7 @@
 |-- components.json
 |-- jsconfig.json
 |-- next.config.mjs
+|-- package-lock.json
 |-- package.json
 |-- pnpm-lock.yaml
 |-- postcss.config.mjs

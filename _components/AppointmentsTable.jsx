@@ -1,5 +1,4 @@
 "use client";
-import { FaCheckCircle } from "react-icons/fa";
 
 import { Select } from "@/_components/ui/Select";
 import {
@@ -62,7 +61,7 @@ export default function AppointmentsTable() {
           : appointment
       )
     );
-    toast(<> <FaCheckCircle color="green" size={20}  /> Status has been updated Successfully.</>);
+    toast(<> <CircleCheckBig /> Status has been updated Successfully.</>);
   };
 
   const getStatusColor = (status) => {

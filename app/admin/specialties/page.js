@@ -9,8 +9,7 @@ export const metadata = {
   description: "Manage appointments and bookings",
 };
 
-async function page(props) {
-  const params = await props.params;
+async function page({ params }) {
   const fetchedAppointments = await fetchAllAppointmentsFromSupabase();
 
   return (
