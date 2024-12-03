@@ -1,5 +1,6 @@
 |-- .env.local
 |-- .eslintrc.json
+|-- .gitattributes
 |-- .gitignore
 |-- .pnp.cjs
 |-- .pnp.loader.mjs
