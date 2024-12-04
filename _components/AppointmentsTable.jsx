@@ -28,8 +28,7 @@ import { updateAppointmentStatus } from "@/_lib/actions";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import StatusFilterButtons from "@/_components/StatusFilterButtons";
-import { CircleCheckBig } from 'lucide-react';
-
+import { FaCheckCircle } from "react-icons/fa";
 
 const TruncatedCell = ({ content }) => (
   <TooltipProvider>
@@ -61,7 +60,7 @@ export default function AppointmentsTable() {
           : appointment
       )
     );
-    toast(<> <CircleCheckBig /> Status has been updated Successfully.</>);
+    toast(<>  <FaCheckCircle color="green" size={20} /> Status has been updated Successfully.</>);
   };
 
   const getStatusColor = (status) => {
