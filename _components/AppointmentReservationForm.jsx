@@ -1,24 +1,21 @@
 "use client";
+import { Button } from "@/_components/ui/Button";
+import { Calendar } from "@/_components/ui/Calendar";
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from "@/_components/ui/Card";
-import { Button } from "@/_components/ui/Button";
 import { Input } from "@/_components/ui/Input";
 import { Label } from "@/_components/ui/Label";
-import { Textarea } from "@/_components/ui/Textarea";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/_components/ui/Popover";
-import { Calendar } from "@/_components/ui/Calendar";
-import { CalendarIcon } from "lucide-react";
-import { useState, useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -26,12 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/_components/ui/Select";
-import { Clock } from "lucide-react";
+import { Textarea } from "@/_components/ui/Textarea";
 import { createAppointment } from "@/_lib/actions";
+import { CalendarIcon, Clock } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { toast } from "sonner";
-import { redirect } from "next/dist/server/api-utils";
-import { useRouter } from "next/navigation";
 
 export default function AppointmentReservationForm({ doctor, user }) {
   const [date, setDate] = useState(null);
